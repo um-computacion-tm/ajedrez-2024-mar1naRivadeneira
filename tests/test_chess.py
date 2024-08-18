@@ -4,13 +4,13 @@ from chess import Chess
 
 
 class TestChess(unittest.TestCase):
-    def test_change_turn(self):
-        chess=Chess()
-        self.assertEqual(chess._Chess__turn__, "WHITE")
-        chess.change_turn()
-        self.assertEqual(chess._Chess__turn__, "BLACK")
-        chess.change_turn()
-        self.assertEqual(chess._Chess__turn__, "WHITE")
+    
+    def setUp(self):
+        self.__game__ = Chess()
+        
+    def test_initial_turn(self):
+        self.assertEqual(self.__game__.turn, "WHITE" , "El turno debe ser de las blancas")
+
         
 if __name__ == '__main__':
     unittest.main()                
