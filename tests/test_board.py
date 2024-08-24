@@ -1,10 +1,26 @@
 import unittest
-from board import Board
-from rook import Rook
-from queen import Queen
-from bishop import Bishop
+from chess.board import Board
+from chess.rook import Rook
+from chess.queen import Queen
+from chess.bishop import Bishop
 
-class TestBoard(unittest.TestCase):
+class TestBoard(unittest.TestCase):  #verifica la representacion del tablero
+    def test_str_board(self):
+        board = Board()
+        self.assertEqual(
+            str(board),
+            (
+                "♖      ♖\n"
+                "        \n"
+                "        \n"
+                "        \n"
+                "        \n"
+                "        \n"
+                "        \n"
+                "♜      ♜\n"
+            )
+        )
+    
     def setUp(self):
         self.board = Board()
         
