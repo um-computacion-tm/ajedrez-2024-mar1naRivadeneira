@@ -5,6 +5,12 @@ from chess.piece import Piece
 class Rook(Piece):
    def mover(self):
       pass
+   
+   def __str__(self):  #devuelve el simbolo de la torre segun el color de la pieza
+        if self.__color__ == "WHITE":
+            return "♜"
+        else:
+            return "♖"
 
    def is_valid_move(self, from_row, from_col, to_row, to_col, board):
       if from_col == to_col:
