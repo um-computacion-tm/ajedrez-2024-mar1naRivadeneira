@@ -7,20 +7,20 @@ from chess.knight import Knight
 from chess.pawn import Pawn 
 from chess.king import King
 
-class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y las piezas
+class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y las piezas 
     def test_str_board(self):
         board = Board()
         self.assertEqual(
             str(board),
             (
-                "♖♘♗♕♔♗♘♖\n"    
-                "♙♙♙♙♙♙♙♙\n"         
+                "♜♞♝♛♚♝♞♜\n"    
+                "♟♟♟♟♟♟♟♟\n"         
                 "        \n"
                 "        \n"
                 "        \n"
                 "        \n"
-                "♟♟♟♟♟♟♟♟\n"
-                "♜♞♝♛♚♝♞♜\n"
+                "♙♙♙♙♙♙♙♙\n"
+                "♖♘♗♕♔♗♘♖\n"
             )
         )
     
