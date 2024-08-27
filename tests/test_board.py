@@ -3,6 +3,9 @@ from chess.board import Board
 from chess.rook import Rook
 from chess.queen import Queen
 from chess.bishop import Bishop
+from chess.knight import Knight 
+from chess.pawn import Pawn 
+from chess.king import King
 
 class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y las piezas
     def test_str_board(self):
