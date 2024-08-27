@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from chess import Chess
+from chess.chess import Chess
 from chess.cli import play      #patch sobreescribe el comportamiento de algo, en este caso sobreescribe el print, el imput no se ejecuta
 
 
@@ -21,7 +21,7 @@ class TestCli(unittest.TestCase):
         chess = Chess()
         play(chess)
         self.assertEqual(mock_input.call_count, 4)
-        self.assertEqual(mock_print.call_count, 2)
+        self.assertEqual(mock_print.call_count, 1)
         self.assertEqual(mock_chess_move.call_count, 1)
         
     @patch( # este patch controla lo que hace el input
@@ -42,7 +42,7 @@ class TestCli(unittest.TestCase):
         chess = Chess()
         play(chess)
         self.assertEqual(mock_input.call_count, 1)
-        self.assertEqual(mock_print.call_count, 3)
+        self.assertEqual(mock_print.call_count, 2)
         self.assertEqual(mock_chess_move.call_count, 0)    
         
     @patch( # este patch controla lo que hace el input 
@@ -63,5 +63,5 @@ class TestCli(unittest.TestCase):
         chess = Chess()
         play(chess)
         self.assertEqual(mock_input.call_count, 4)
-        self.assertEqual(mock_print.call_count, 3)
+        self.assertEqual(mock_print.call_count, 2)
         self.assertEqual(mock_chess_move.call_count, 0)    
