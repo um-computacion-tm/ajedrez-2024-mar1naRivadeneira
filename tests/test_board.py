@@ -4,20 +4,20 @@ from chess.rook import Rook
 from chess.queen import Queen
 from chess.bishop import Bishop
 
-class TestBoard(unittest.TestCase):  #verifica la representacion del tablero
+class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y las piezas
     def test_str_board(self):
         board = Board()
         self.assertEqual(
             str(board),
             (
-                "♖      ♖\n"
+                "♖♘♗♕♔♗♘♖\n"    
+                "♙♙♙♙♙♙♙♙\n"         
                 "        \n"
                 "        \n"
                 "        \n"
                 "        \n"
-                "        \n"
-                "        \n"
-                "♜      ♜\n"
+                "♟♟♟♟♟♟♟♟\n"
+                "♜♞♝♛♚♝♞♜\n"
             )
         )
     
