@@ -13,14 +13,14 @@ class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y l
         self.assertEqual(
             str(board),
             (
-                "♜♞♝♛♚♝♞♜\n"    
-                "♟♟♟♟♟♟♟♟\n"         
+                "♖♘♗♕♔♗♘♖\n"    
+                "♙♙♙♙♙♙♙♙\n"          
+                "        \n"
+                "        \n"            
                 "        \n"
                 "        \n"
-                "        \n"
-                "        \n"
-                "♙♙♙♙♙♙♙♙\n"
-                "♖♘♗♕♔♗♘♖\n"
+                "♟♟♟♟♟♟♟♟\n"
+                "♜♞♝♛♚♝♞♜\n" 
             )
         )
     
