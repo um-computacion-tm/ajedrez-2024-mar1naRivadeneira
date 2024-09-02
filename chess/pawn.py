@@ -2,16 +2,13 @@
 from chess.piece import Piece
 
 class Pawn(Piece):
+     white_str = "♟" 
+     black_str = "♙"
+   
      def mover(self):
-          pass
+          pass                      
      
-     def __str__(self):  #devuelve el simbolo de la torre segun el color de la pieza
-      if self.__color__ == "WHITE":
-          return "♙"
-      else:
-         return "♟" 
- 
-     def __init__(self, color):
+     '''def __init__(self, color):
           super().__init__(color)
           self.has_moved = False   #para ver si el peon ha hecho su primer mov
           
@@ -23,4 +20,4 @@ class Pawn(Piece):
                     return board.get_piece(to_row, to_col) is None #movimiento vertical de una casilla
                if (to_row - from_row) == 2 * direction and not self.has_move:  #movimiento vertical de dos casillas
                     return (board.get_piece(to_row, to_col) is None and 
-                            board.get_piece(from_row + direction, to_col) is None)
+                            board.get_piece(from_row + direction, to_col) is None)'''
