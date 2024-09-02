@@ -8,6 +8,25 @@ class TestChess(unittest.TestCase):
     def setUp(self):
         self.chess = Chess()
         
+    def test_show_board(self):
+        chess = Chess()
+            
+        #lo que se espera que devuelva    
+        tablero_esperado = (
+            "♖♘♗♕♔♗♘♖\n"    
+            "♙♙♙♙♙♙♙♙\n"  
+            "        \n"
+            "        \n"
+            "        \n"
+            "        \n"
+            "♟♟♟♟♟♟♟♟\n"
+            "♜♞♝♛♚♝♞♜\n"           
+        )    
+        
+        tablero_actual = chess.show_board() 
+        self.assertEqual(tablero_actual, tablero_esperado) #compara la salida esperada con la salida real
+        
+        
     def test_change_turn(self): #comprueba el cambio de turno entre jugadores 
         #test para verificar que el turno cambia de  blanco a negro
         self.assertEqual(self.chess.turn, "WHITE")
