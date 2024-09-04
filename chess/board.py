@@ -4,9 +4,9 @@ from chess.queen import Queen
 from chess.king import King
 from chess.bishop import Bishop
 from chess.knight import Knight
-
+from chess.excepciones import OutOfBoard
 class Board:
-    def __init__(self):
+    def __init__(self, for_test = False): #para que en los test de cada pieza no aparezcan las demas
         self.__positions__ = []
         for _ in range(8):
             col = []
@@ -50,7 +50,16 @@ class Board:
         return board_str
          
     def get_piece(self, row, col):
-          return self.__positions__[row][col]
+        if not (
+            0 <= row < 8 or 0 <= col < 8
+        ):
+            raise OutOfBoard()
+        return self.__positions__[row][col]
       
     def set_piece(self, row, col, piece):
         self.__positions__[row][col] = piece
+        
+    def move(self, from_row, from_col, to_row, to_col):
+        origin = self.get_piece(from_row, from_col)
+        self.set_piece(to_row, to_col, origin)
+        self.set_piece(from_row, from_col, None)    

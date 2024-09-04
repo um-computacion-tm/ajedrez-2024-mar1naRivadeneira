@@ -8,3 +8,6 @@ class Piece:
             return self.white_str
         else:
             return self.black_str
+        
+    def mover(self):
+      pass    
