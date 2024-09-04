@@ -17,3 +17,11 @@
 - agregado del movimiento descendente y ascendente de la pieza rook
 - test de los movimiento desc y asc de rook
 - agregado del metodo set_ piece y __str__
+
+## [0.3] - 03 / 09 / 2024
+
+## Agregado
+
+- agregado de test_move para verificar el movimiento de la torre en el tablero
+- agregado del test get_piece
+- actualizacion del metodo move en la clase Board
