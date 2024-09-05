@@ -48,7 +48,7 @@ class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y l
         self.assertEqual(
             str(board),
             (
-                " ♖      \n"
+                "♜       \n"
                 "        \n"
                 "        \n"
                 "        \n"
@@ -59,6 +59,17 @@ class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y l
             )
         )
  
+    def test_get_piece_out_of_range(self):
+        board = Board(for_test=True)
+        
+        with self.assertRaises(OutOfBoard) as exc:
+            board.get_piece(10, 10)
+
+        self.assertEqual(
+            exc.exception.message,
+            "La posicion indicada se encuentra fuera del tablero"
+        )
+        
     def test_posiciones_iniciales_de_piezas(self):
         
         self.assertIsInstance(self.board.get_piece(0, 3), Queen)    
