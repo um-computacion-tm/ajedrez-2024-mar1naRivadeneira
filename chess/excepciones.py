@@ -1,15 +1,17 @@
 
 #jeraquia de invalidmove de rook,piece,pawn pero todas son movimientos invalidos pero algunas especificos
 class InvalidMove(Exception):  # Funciones para manejar excepciones estándar
-    pass
+    message = "Movimiento de pieza invalido"
+    def __str__(self):
+        return self.message
 
-class InvalidMoveNoPiece(InvalidMove):  #Excepción para un movimiento desde una casilla vacía.
-    ...
+class InvalidTurn(InvalidMove):
+    message = "No puedes mover pieza de otro jugador"
 
-class InvalidMoveRookMove(InvalidMove): #Excepción para un movimiento inválido de la torre.
-    ...
+class EmptyPosition(InvalidMove):
+    message = "La posicion esta vacia"
 
-
-
-
+class OutOfBoard(InvalidMove):
+    message = "La posicion indicada se encuentra fuera del tablero"
+    
 #guardado en raise es opcional no es un requisito obligatorio
