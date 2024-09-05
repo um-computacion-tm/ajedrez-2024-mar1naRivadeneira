@@ -3,11 +3,8 @@ from chess.piece import Piece
 #from exceptions import InvalidMoveRookMove  (importar las excepciones)  aca levantamos la excepcion y en el CLI la atrapamos
 
 class Rook(Piece):
-   white_str = "♜"  
-   black_str = "♖"    
-    
-   def mover(self):
-      pass
+   white_str = "♖"  
+   black_str = "♜"    
    
    def valid_positions(
          self,
