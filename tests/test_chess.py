@@ -13,14 +13,14 @@ class TestChess(unittest.TestCase):
             
         #lo que se espera que devuelva    
         tablero_esperado = (
-            "♖♘♗♕♔♗♘♖\n"    
-            "♙♙♙♙♙♙♙♙\n"  
+            "♜♞♝♛♚♝♞♜\n"    
+            "♟♟♟♟♟♟♟♟\n"  
             "        \n"
             "        \n"
             "        \n"
             "        \n"
-            "♟♟♟♟♟♟♟♟\n"
-            "♜♞♝♛♚♝♞♜\n"           
+            "♙♙♙♙♙♙♙♙\n" 
+            "♖♘♗♕♔♗♘♖\n"          
         )    
         
         tablero_actual = chess.show_board() 
