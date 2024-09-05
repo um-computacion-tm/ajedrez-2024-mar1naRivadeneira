@@ -2,11 +2,9 @@
 from chess.piece import Piece
 
 class Pawn(Piece):
-     white_str = "♟" 
-     black_str = "♙"
+     white_str = "♙" 
+     black_str = "♟"
    
-     def mover(self):
-          pass                      
      
      '''def __init__(self, color):
           super().__init__(color)
