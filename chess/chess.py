@@ -1,17 +1,28 @@
-from .board import Board
+from chess.board import Board
+from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition
+
 
 class Chess:
     def __init__(self):
-        self.__board__ = Board()
         self.__turn__ = "WHITE"
+        self.__board__ = Board()
+        
         
     def is_playing(self):
         return True
 
     def move( self, from_row, from_col, to_row, to_col, ):
-        #validacion de coordenadas van en clase chess, no en cli
+        #validacion de coordenadas
         piece = self.__board__.get_piece(from_row, from_col)
-        self.change_turn()     
+        if not piece :
+            raise EmptyPosition()
+        if not piece.get_color() == self.__turn__:
+            raise InvalidTurn()
+        if not piece.valid_positions(from_row, from_col, to_row, to_col):
+            raise InvalidMove()
+        self.__board__.move( from_row, from_col, to_col, to_row)
+        self.change_turn()    
+         
     @property
     def turn(self):
         return self.__turn__
