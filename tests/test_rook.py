@@ -10,9 +10,9 @@ class TestRook(unittest.TestCase):
         rook = Rook("WHITE", board)
         self.assertEqual(
             str(rook),
-            "♜",
+            "♖",
         )
-
+                         
     def test_move_vertical_desc(self):
         board = Board()
         rook = Rook("WHITE", board)
@@ -52,3 +52,6 @@ class TestRook(unittest.TestCase):
             possibles,
             [(5, 1), (6, 1)]
         )
+
+if __name__ == '__main__':
+    unittest.main()       
