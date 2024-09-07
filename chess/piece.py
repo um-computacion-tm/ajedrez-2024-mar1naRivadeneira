@@ -9,5 +9,5 @@ class Piece:
         else:
             return self.black_str
         
-    def mover(self):
-      pass    
+    def get_color(self):
+        return self.__color__
