@@ -1,6 +1,6 @@
 import unittest
 from chess.chess import Chess
-
+from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition
 
 
 class TestChess(unittest.TestCase):
@@ -43,12 +43,29 @@ class TestChess(unittest.TestCase):
         self.assertEqual(turno_inicial, "WHITE")
         
         #realizo un movimiento
-        self.chess.move(0, 0, 1, 0)
+        self.chess.move(7, 0, 5, 0)
         
         #comprueba que el turno cambio
         new_turn = self.chess.turn
         self.assertNotEqual(new_turn, turno_inicial)    
         self.assertEqual(new_turn, "BLACK")
         
+    def test_raise_empty_position(self):
+        try:
+            self.chess.move(3, 3, 4, 4)
+        except EmptyPosition:
+            pass                 #si se captura la excepcion, la prueba pasa
+        else:
+            self.fail("se esperaba excepcion Empty position pero no se lanzo")
+            
+    def test_raise_invalid_move(self):
+        try:
+            self.chess.move(0, 0, 1, 1)
+        except InvalidMove:
+            pass
+        else:
+            self.fail("se esperaba la excepcion InvalidMove pero no se lanzo")            
+            
+    
 if __name__ == '__main__':
     unittest.main()                
