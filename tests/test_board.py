@@ -7,6 +7,7 @@ from chess.knight import Knight
 from chess.pawn import Pawn 
 from chess.king import King
 from chess.excepciones import OutOfBoard
+
 class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y las piezas 
     
     def setUp(self):
@@ -32,25 +33,25 @@ class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y l
         board = Board(for_test=True)
         rook = Rook(color='BLACK', board=board)
         board.set_piece(0, 0, rook)
-
+        
         board.move(
             from_row=0,
             from_col=0,
-            to_row=0,
-            to_col=1,
+            to_row=2,
+            to_col=0,
         )
-
+        
         self.assertIsInstance(
-            board.get_piece(0, 1),
+            board.get_piece(2, 0),
             Rook,
         )
-
+        
         self.assertEqual(
             str(board),
             (
+                "        \n"
+                "        \n"
                 "♜       \n"
-                "        \n"
-                "        \n"
                 "        \n"
                 "        \n"
                 "        \n"
