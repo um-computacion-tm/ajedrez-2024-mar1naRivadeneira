@@ -1,5 +1,5 @@
 from chess.chess import Chess            #jeraquia de invalidmove de rook,piece,pawn pero todas son movimientos invalidos pero algunas especificos
-from chess.excepciones import InvalidMove
+from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition
 
 def main():
     chess = Chess()
@@ -9,7 +9,7 @@ def main():
 def play(chess):
     try:
 
-        # print(chess.show_board())
+        print(chess.show_board())
         print("turn: ", chess.turn) #primer print por el que pasa el error
         from_row = int(input("From row: "))
         from_col = int(input("From col: "))
