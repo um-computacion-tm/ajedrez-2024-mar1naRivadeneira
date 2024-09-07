@@ -52,6 +52,17 @@ class TestRook(unittest.TestCase):
             possibles,
             [(5, 1), (6, 1)]
         )
+    
+    def test_move_diagonal_desc(self):
+        board = Board()
+        rook = board.get_piece(col=0, row=0)
+        is_possible = rook.valid_positions(
+            from_row=0,
+            from_col=0,
+            to_row=1,
+            to_col=1,
+        )
 
+        self.assertFalse(is_possible)
 if __name__ == '__main__':
     unittest.main()       
