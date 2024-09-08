@@ -25,3 +25,14 @@
 - agregado de test_move para verificar el movimiento de la torre en el tablero
 - agregado del test get_piece
 - actualizacion del metodo move en la clase Board
+
+## [0.4] - 08 / 09 / 2024
+
+## Agregado
+- agregado de excepciones
+- test piezas fuera del rango del tablero
+- arreglos en los colores de las piezas
+- modificacion en el metodo move
+- testeo de las excepciones InvalidMove e InvalidTurn del metodo move
+- test del movimiento de rook
+- agregado del movimiento horizontal del rook
