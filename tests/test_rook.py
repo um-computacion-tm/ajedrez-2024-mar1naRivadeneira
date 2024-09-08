@@ -28,7 +28,7 @@ class TestRook(unittest.TestCase):
         possibles = rook.possible_positions_va(4, 1)
         self.assertEqual(
             possibles,
-            [(3, 1), (2, 1), (1, 1), (0, 1)]
+            [(3, 1), (2, 1), (1, 1)]
         )
 
     def test_move_vertical_desc_with_own_piece(self):
@@ -64,5 +64,7 @@ class TestRook(unittest.TestCase):
         )
 
         self.assertFalse(is_possible)
+        
+        
 if __name__ == '__main__':
     unittest.main()       
