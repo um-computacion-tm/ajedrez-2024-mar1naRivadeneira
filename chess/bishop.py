@@ -1,8 +1,12 @@
-#se mueve solo en diagonales en cualquier casilla
+#Movimientos diagonales en línea recta, similares a la torre pero en las diagonales.
 from chess.piece import Piece
 
 class Bishop(Piece):
    white_str = "♗"  
    black_str = "♝"
    
- 
+   def get_possible_positions(self, from_row, from_col):
+        return self.possible_diagonal_positions(
+            from_row,
+            from_col,
+        )
