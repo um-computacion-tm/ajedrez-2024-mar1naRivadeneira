@@ -2,7 +2,7 @@ import unittest
 from chess.chess import Chess
 from chess.rook import Rook
 from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition
-
+from chess.board import Board
 
 class TestChess(unittest.TestCase):
     
@@ -37,15 +37,15 @@ class TestChess(unittest.TestCase):
         #test pars verificar que el turno cambia de negro a blanco
         self.chess.change_turn()
         self.assertEqual(self.chess.turn, "WHITE")
-       
-    #comentado hasta que implemente los movimientos del peon 
+        
     '''def test_move_changes_turn(self):#verifica el cambio de turno despues de un movimiento
+        self.chess = Chess()
         #comprobar el turno incial
         turno_inicial = self.chess.turn
         self.assertEqual(turno_inicial, "WHITE")
         
         #mover el peon que esta antes de la torre
-        self.chess.move(6, 0, 5, 0)#mover peon blanco
+        self.chess.move(7, 0, 7, 1)#mover torre blanco
          
         #comprueba que el turno cambio
         new_turn = self.chess.turn
@@ -60,14 +60,19 @@ class TestChess(unittest.TestCase):
         else:
             self.fail("se esperaba excepcion Empty position pero no se lanzo")
             
-    def test_raise_invalid_move(self):
+    def test_raise_invalid_turn(self):
         try:
-            self.chess.move(0, 0, 1, 1)
-        except InvalidMove:
+            self.chess.move(0, 0, 1, 0)
+        except InvalidTurn:
             pass
         else:
-            self.fail("se esperaba la excepcion InvalidMove pero no se lanzo")            
+            self.fail("se esperaba la excepcion InvalidTurn pero no se lanzo")    
             
-    #falta test excepcion InvalidMove
+    def test_raise_invalid_move(self):
+       self.chess.__board__.set_piece(0, 0, Rook("WHITE", self.chess.__board__))
+       with self.assertRaises(InvalidMove):
+           self.chess.move(0, 0, 2, 2) 
+
+
 if __name__ == '__main__':
     unittest.main()                
