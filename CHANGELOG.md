@@ -1,5 +1,38 @@
 # Changelog
 
-## [0.1] - 13 / 08 / 2024
+## [0.1] - 23 / 08 / 2024
 
 ## Agregado
+- Agregado de posiciones en el board
+- Creacion de las piezas
+- Agregado de turnos
+- tests de turno, cli y board
+- movimientos en vertical de pawn y rook
+
+## [0.2] - 01 / 09 / 2024
+
+## Agregado
+- agregado del test de show_board en la clase chess
+- arreglo en el color de las piezas
+- agregado del movimiento descendente y ascendente de la pieza rook
+- test de los movimiento desc y asc de rook
+- agregado del metodo set_ piece y __str__
+
+## [0.3] - 03 / 09 / 2024
+
+## Agregado
+
+- agregado de test_move para verificar el movimiento de la torre en el tablero
+- agregado del test get_piece
+- actualizacion del metodo move en la clase Board
+
+## [0.4] - 08 / 09 / 2024
+
+## Agregado
+- agregado de excepciones
+- test piezas fuera del rango del tablero
+- arreglos en los colores de las piezas
+- modificacion en el metodo move
+- testeo de las excepciones InvalidMove e InvalidTurn del metodo move
+- test del movimiento de rook
+- agregado del movimiento horizontal del rook
