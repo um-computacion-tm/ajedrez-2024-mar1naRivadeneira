@@ -48,7 +48,7 @@ class Piece:
       possibles = []
       next_row = row -1
       next_col = col +1
-      while next_row >= 0 and next_col  >= 0:
+      while next_row >= 0 and next_col < 8:
          other_piece = self.__board__.get_piece(next_row, next_col)
          if other_piece is not None:
             #si la pieza es del oponente, puede capturarla
