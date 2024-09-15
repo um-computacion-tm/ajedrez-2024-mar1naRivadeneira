@@ -61,6 +61,24 @@ class Piece:
          next_col += 1
       return possibles
     
+    def possible_positions_ddi(self, row, col):
+        # movimiento diagonal hacia abajo a la izquierda (fila aumenta, columna disminuye)
+        possibles = []
+        next_row = row + 1
+        next_col = col - 1
+        while next_row < 8 and next_col >= 0:
+            other_piece = self.__board__.get_piece(next_row, next_col)
+            if other_piece is not None:
+                if other_piece.__color__ != self.__color__:
+                    possibles.append((next_row, next_col))
+                # si hay una pieza, no puede seguir más allá
+                break
+            # Si la celda está vacía, la agrega como una posición posible
+            possibles.append((next_row, next_col))
+            next_row += 1
+            next_col -= 1
+        return possibles
+    
     
     #Movimientos verticales y horizontales
     
