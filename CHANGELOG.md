@@ -36,3 +36,12 @@
 - testeo de las excepciones InvalidMove e InvalidTurn del metodo move
 - test del movimiento de rook
 - agregado del movimiento horizontal del rook
+
+## [0.5] - 19 / 09 / 2024
+
+## Agregado
+
+- agregado de movimientos diagonales del bishop
+- test de movimientos diagonales ascendentes y descendentes de bishop
+- test de movimientos horizontales de rook
+- test de excepcion InvalidMove
