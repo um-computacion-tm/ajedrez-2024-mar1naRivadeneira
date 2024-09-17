@@ -13,16 +13,6 @@ class Piece:
         return self.__color__
     
     #movimientos diagonales 
-    
-    def possible_diagonal_positions(self, from_row, from_col, to_col, to_row):
-      
-      possible_positions = (
-         self.possible_positions_dai(from_row, from_col)+ #Diagonal ascendente izquierda
-         self.possible_positions_dad(from_row, from_col)+ #Diagonal ascendente derecha
-         self.possible_positions_ddi(from_row, from_col)+ #Diagonal descendente izquierda
-         self.possible_positions_ddd(from_row, from_col)  #Diagonal desscendente derecha
-      )
-      return (to_row, to_col) in possible_positions
    
     def possible_positions_dai(self, row, col):
       #movimiento diagonal hacia arriba para la izquierda(fila disminnuye y columna disminuye)
@@ -99,17 +89,6 @@ class Piece:
     
     
     #Movimientos verticales y horizontales
-    
-    def possible_orthogonal_positions(self, from_row, from_col, to_row, to_col,):
-        
-        possible_positions = (
-            #movimientos horizontales y verticales
-            self.possible_positions_vd(from_row, from_col) +
-            self.possible_positions_va(from_row, from_col) +
-            self.possible_positions_hd(from_row, from_col) +
-            self.possible_positions_ha(from_row, from_col)
-         )
-        return (to_row, to_col) in possible_positions
      
     def possible_positions_vd(self, row, col):
        #vertical descendente(moverse  hacia abajo en la misma columna)
