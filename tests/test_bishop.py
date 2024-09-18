@@ -46,6 +46,26 @@ class TestBishop(unittest.TestCase):
             [(5, 5), (6, 6), (7, 7)]
         )
         
+    def test_move_diagonal_asc_izquierda_with_own_piece(self):
+        self.board.set_piece(3, 3, Bishop("WHITE", self.board))
+        bishop = Bishop("WHITE", self.board)
+        self.board.set_piece(4, 4, bishop)
+        possibles = bishop.possible_positions_dai(4, 4)
+        self.assertEqual(
+            possibles,
+            []
+        ) 
+        
+    def test_move_diagonal_asc_izquierda_with_opponent_piece(self):
+        self.board.set_piece(3, 3, Bishop("BLACK", self.board))
+        bishop = Bishop("WHITE", self.board)
+        self.board.set_piece(4, 4, bishop)
+        possibles = bishop.possible_positions_dai(4, 4)
+        self.assertEqual(
+            possibles,
+            [(3, 3)]
+        )               
     
+          
 if __name__ == '__main__':
     unittest.main()       
