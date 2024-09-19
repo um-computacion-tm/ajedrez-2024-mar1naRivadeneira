@@ -13,16 +13,6 @@ class Piece:
         return self.__color__
     
     #movimientos diagonales 
-    
-    def valid_positions(self, from_row, from_col, to_col, to_row):
-      
-      possible_diagonal_positions = (
-         self.possible_positions_dai(from_row, from_col)+ #Diagonal ascendente izquierda
-         self.possible_positions_dad(from_row, from_col)+ #Diagonal ascendente derecha
-         self.possible_positions_ddi(from_row, from_col)+ #Diagonal descendente izquierda
-         self.possible_positions_ddd(from_row, from_col)  #Diagonal desscendente derecha
-      )
-      return (to_row, to_col) in possible_diagonal_positions
    
     def possible_positions_dai(self, row, col):
       #movimiento diagonal hacia arriba para la izquierda(fila disminnuye y columna disminuye)
@@ -48,7 +38,7 @@ class Piece:
       possibles = []
       next_row = row -1
       next_col = col +1
-      while next_row >= 0 and next_col  >= 0:
+      while next_row >= 0 and next_col < 8:
          other_piece = self.__board__.get_piece(next_row, next_col)
          if other_piece is not None:
             #si la pieza es del oponente, puede capturarla
@@ -61,19 +51,44 @@ class Piece:
          next_col += 1
       return possibles
     
+    def possible_positions_ddi(self, row, col):
+        # movimiento diagonal hacia abajo a la izquierda (fila aumenta, columna disminuye)
+        possibles = []
+        next_row = row + 1
+        next_col = col - 1
+        while next_row < 8 and next_col >= 0:
+            other_piece = self.__board__.get_piece(next_row, next_col)
+            if other_piece is not None:
+                if other_piece.__color__ != self.__color__:
+                    possibles.append((next_row, next_col))
+                # si hay una pieza, no puede seguir más allá
+                break
+            # Si la celda está vacía, la agrega como una posición posible
+            possibles.append((next_row, next_col))
+            next_row += 1
+            next_col -= 1
+        return possibles
+    
+    def possible_positions_ddd(self, row, col):
+    # movimiento diagonal hacia abajo a la derecha (fila aumenta, columna aumenta)
+        possibles = []
+        next_row = row + 1
+        next_col = col + 1
+        while next_row < 8 and next_col < 8:
+            other_piece = self.__board__.get_piece(next_row, next_col)
+            if other_piece is not None:
+                # Si hay una pieza del oponente, puede capturarla
+                if other_piece.__color__ != self.__color__:
+                    possibles.append((next_row, next_col))
+                break
+            # Si la celda está vacía, la agrega como posible posición
+            possibles.append((next_row, next_col))
+            next_row += 1
+            next_col += 1
+        return possibles
+    
     
     #Movimientos verticales y horizontales
-    
-    def valid_positions(self, from_row, from_col, to_row, to_col,):
-        
-        possible_orthogonal_positions = (
-            #movimientos horizontales y verticales
-            self.possible_positions_vd(from_row, from_col) +
-            self.possible_positions_va(from_row, from_col) +
-            self.possible_positions_hd(from_row, from_col) +
-            self.possible_positions_ha(from_row, from_col)
-         )
-        return (to_row, to_col) in possible_orthogonal_positions
      
     def possible_positions_vd(self, row, col):
        #vertical descendente(moverse  hacia abajo en la misma columna)

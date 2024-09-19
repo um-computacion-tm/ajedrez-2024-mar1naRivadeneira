@@ -10,7 +10,7 @@ def play(chess):
     try:
 
         print(chess.show_board())
-        print("turn: ", chess.turn) #primer print por el que pasa el error
+        print("turn: ", chess.turn) 
         from_row = int(input("From row: "))
         from_col = int(input("From col: "))
         to_row = int(input("To Row: "))
@@ -28,7 +28,7 @@ def play(chess):
         print("Su movimiento es invalido")   #el orden de las excepciones importa,  tiene que ir de la mas particular a la mas general
         
     except Exception as e:
-        print("error", e) #segundo print por el que pasa el error
+        print("error", e) 
             
 if __name__ == '__main__':
     main()
