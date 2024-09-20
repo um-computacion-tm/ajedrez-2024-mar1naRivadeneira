@@ -1,21 +1,56 @@
-#se mueve solo hacia adelante y captura en diagonal, una casilla a la vez, al inicio puede moverse dos lugares
+#movimiento inicial de dos casillas, captura en diagonal
 from chess.piece import Piece
 
 class Pawn(Piece):
      white_str = "♙" 
      black_str = "♟"
    
-     
-     '''def __init__(self, color):
-          super().__init__(color)
-          self.has_moved = False   #para ver si el peon ha hecho su primer mov
-          
-     def is_valid_move(self, from_row, from_col, to_col, to_row, board):
-          direction = 1 if self.__color__ == 'WHITE' else -1 # el peon blanco se mueve hacia arriba y los negros para abajo     
-          
-          if from_col == to_col:
-               if (to_row - from_row) == direction:
-                    return board.get_piece(to_row, to_col) is None #movimiento vertical de una casilla
-               if (to_row - from_row) == 2 * direction and not self.has_move:  #movimiento vertical de dos casillas
-                    return (board.get_piece(to_row, to_col) is None and 
-                            board.get_piece(from_row + direction, to_col) is None)'''
+#PROMOTE: cuando el peon llega al final del tablero se convierte en una reina/rey y se valida en el peon, no en el board o chess
+
+#movimiento del peon
+     def get_possible_positions(self, from_row, from_col):
+        possibles = self.get_possible_positions_move(
+            from_row,
+            from_col,
+        )
+        possibles.extend(
+            self.get_possible_positions_eat(from_row, from_col)
+        )
+        return possibles
+
+     def get_possible_positions_eat(self, from_row, from_col):
+        if self.__color__ == "BLACK":
+            other_piece = self.__board__.get_piece(from_row + 1, from_col + 1)
+            if other_piece and other_piece.__color__ == "WHITE":
+                return [(from_row + 1, from_col + 1)]
+        return []
+
+     def get_possible_positions_move(self, from_row, from_col):
+          if self.__color__ == "BLACK":
+               if self.__board__.get_piece(from_row + 1, from_col) is None:
+                    if (
+                         from_row == 1 and
+                         self.__board__.get_piece(from_row + 2, from_col) is None
+                    ):
+                         return [
+                         (from_row + 1, from_col),
+                         (from_row + 2, from_col)
+                         ]
+                    else:
+                         return [
+                         (from_row + 1, from_col),
+                         ]
+          else:
+               if from_row == 6:
+                    return [
+                         (from_row - 1, from_col),
+                         (from_row - 2, from_col)
+                    ]
+               else:
+                    if self.__board__.get_piece(from_row - 1, from_col) is None:
+                         return [
+                         (from_row - 1, from_col),
+                         ]
+                    else:
+                         return []
+          return []
