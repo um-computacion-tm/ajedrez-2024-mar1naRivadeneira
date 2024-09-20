@@ -12,6 +12,14 @@ class Piece:
     def get_color(self):
         return self.__color__
     
+    #metodo para combinar las posiciones y evitar la duplicacion
+    
+    def combine_possible_positions(self, position_methods, from_row, from_col):
+        possible_positions = []
+        for method in position_methods:
+            possible_positions += method( from_row, from_col)
+        return possible_positions    
+    
     #movimientos diagonales 
    
     def possible_positions_dai(self, row, col):
