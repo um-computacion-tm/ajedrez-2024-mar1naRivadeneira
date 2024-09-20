@@ -8,10 +8,12 @@ class Bishop(Piece):
   
    def possible_diagonal_positions(self, from_row, from_col, to_col, to_row):
       
-      possible_positions = (
-         self.possible_positions_dai(from_row, from_col)+ #Diagonal ascendente izquierda
-         self.possible_positions_dad(from_row, from_col)+ #Diagonal ascendente derecha
-         self.possible_positions_ddi(from_row, from_col)+ #Diagonal descendente izquierda
-         self.possible_positions_ddd(from_row, from_col)  #Diagonal desscendente derecha
+      diagonal_methods = (
+         self.possible_positions_dai, #Diagonal ascendente izquierda
+         self.possible_positions_dad, #Diagonal ascendente derecha
+         self.possible_positions_ddi,#Diagonal descendente izquierda
+         self.possible_positions_ddd,  #Diagonal desscendente derecha
       )
+      
+      possible_positions = self.combine_possible_positions(diagonal_methods, from_row, from_col)
       return (to_row, to_col) in possible_positions
