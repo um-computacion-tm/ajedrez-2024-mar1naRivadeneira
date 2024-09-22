@@ -17,14 +17,34 @@ class Pawn(Piece):
             self.get_possible_positions_eat(from_row, from_col)
         )
         return possibles
-
+     
+     #capturas del peon
+     
      def get_possible_positions_eat(self, from_row, from_col):
-        if self.__color__ == "BLACK":
-            other_piece = self.__board__.get_piece(from_row + 1, from_col + 1)
-            if other_piece and other_piece.__color__ == "WHITE":
-                return [(from_row + 1, from_col + 1)]
-        return []
-
+          #captura diagonal derecha
+          possibles = []
+          if self.__color__ == "BLACK":
+               other_piece = self.__board__.get_piece(from_row + 1, from_col + 1)
+               if other_piece and other_piece.__color__ == "WHITE":
+                         possibles.append((from_row + 1, from_col + 1))    
+          # Captura diagonal izquierda
+               if self.__board__.in_bounds(from_row + 1, from_col - 1):
+                    other_piece = self.__board__.get_piece(from_row + 1, from_col - 1)
+                    if other_piece and other_piece.__color__ == "WHITE":
+                         possibles.append((from_row + 1, from_col - 1))
+          else:  # Para el peón blanco
+               # Captura diagonal derecha
+               if self.__board__.in_bounds(from_row - 1, from_col + 1):
+                    other_piece = self.__board__.get_piece(from_row - 1, from_col + 1)
+                    if other_piece and other_piece.__color__ == "BLACK":
+                         possibles.append((from_row - 1, from_col + 1))
+               # Captura diagonal izquierda
+               if self.__board__.in_bounds(from_row - 1, from_col - 1):
+                    other_piece = self.__board__.get_piece(from_row - 1, from_col - 1)
+                    if other_piece and other_piece.__color__ == "BLACK":
+                         possibles.append((from_row - 1, from_col - 1))
+          return possibles
+     
      def get_possible_positions_move(self, from_row, from_col):
           if self.__color__ == "BLACK":
                if self.__board__.get_piece(from_row + 1, from_col) is None:
