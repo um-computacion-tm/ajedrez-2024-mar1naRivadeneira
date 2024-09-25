@@ -22,12 +22,12 @@ class Piece:
         piece = self.__board__.get_piece(row, col)
         return piece is not None and piece.get_color() != self.get_color()
     
-    def general_moves(self, current_row, current_col, directions, single_step=False):
+    def general_moves(self, row, col, directions, single_step=False):
         """
         calcula los movimientos generales de la pieza en función de las direcciones especificadas
 
-        current_row: Fila actual de la pieza.
-        current_col: Columna actual de la pieza.
+        row: Fila actual de la pieza.
+        col: Columna actual de la pieza.
         directions: Lista de tuplas que representan las direcciones de movimiento.
         single_step: Si es True, la pieza solo puede moverse una casilla en cada dirección.
         return: Lista de tuplas con los movimientos válidos que se pueden hacer
@@ -35,7 +35,7 @@ class Piece:
         valid_moves = []
 
         for dir_row, dir_col in directions:
-            next_row, next_col = current_row + dir_row, current_col + dir_col
+            next_row, next_col = row + dir_row, col + dir_col
             
             # Mueve en la dirección especificada
             while 0 <= next_row < 8 and 0 <= next_col < 8:
