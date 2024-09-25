@@ -12,7 +12,55 @@ class Piece:
     def get_color(self):
         return self.__color__
     
-    #metodo para combinar las posiciones y evitar la duplicacion
+    def is_occupied(self, row, col):
+        # Verifica si hay una pieza en la posición (row, col)
+        piece = self.__board__.get_piece(row, col)
+        return piece is not None and piece.get_color() == self.get_color()
+    
+    def can_eat(self, row, col):
+        # Verifica si hay una pieza del oponente en la posición (row, col)
+        piece = self.__board__.get_piece(row, col)
+        return piece is not None and piece.get_color() != self.get_color()
+    
+    def general_moves(self, current_row, current_col, directions, single_step=False):
+        """
+        calcula los movimientos generales de la pieza en función de las direcciones especificadas
+
+        current_row: Fila actual de la pieza.
+        current_col: Columna actual de la pieza.
+        directions: Lista de tuplas que representan las direcciones de movimiento.
+        single_step: Si es True, la pieza solo puede moverse una casilla en cada dirección.
+        return: Lista de tuplas con los movimientos válidos que se pueden hacer
+        """
+        valid_moves = []
+
+        for dir_row, dir_col in directions:
+            next_row, next_col = current_row + dir_row, current_col + dir_col
+            
+            # Mueve en la dirección especificada
+            while 0 <= next_row < 8 and 0 <= next_col < 8:
+                # Verificar si hay una pieza con el mismo color
+                if self.is_occupied(next_row, next_col):
+                    break  # Detener si hay una pieza propia
+                # Verificar captura
+                if self.can_eat(next_row, next_col):
+                    valid_moves.append((next_row, next_col))  # Puede capturar
+                    break  # Detener si se captura una pieza
+                # Si está vacío, añadir el movimiento
+                valid_moves.append((next_row, next_col))
+                
+                # Si solo se permite un solo paso, salir del bucle
+                if single_step:
+                    break
+                
+                # Continuar en la misma dirección
+                next_row += dir_row
+                next_col += dir_col
+                
+        return valid_moves
+
+    
+    '''#metodo para combinar las posiciones y evitar la duplicacion
     
     def combine_possible_positions(self, position_methods, from_row, from_col):
         possible_positions = []
@@ -146,5 +194,5 @@ class Piece:
                 break  
             possibles.append((row, next_col))
         return possibles
-    
+'''
    
