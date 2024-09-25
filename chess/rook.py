@@ -6,7 +6,11 @@ class Rook(Piece):
    black_str = "♜"    
    
       
-   def possible_orthogonal_positions(self, from_row, from_col, to_row, to_col,):
+   def possible_moves_orthogonal(self, row, col):
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]  # Vertical y horizontal
+        return self.general_moves(row, col, directions, single_step=False)
+        
+   '''def possible_orthogonal_positions(self, from_row, from_col, to_row, to_col,):
         #lista de metodos para los movimientos ortogonales = verticales y horizontales
         orthogonal_methods = (
             #movimientos horizontales y verticales
@@ -17,4 +21,4 @@ class Rook(Piece):
          )
         
         possible_positions = self.combine_possible_positions(orthogonal_methods, from_row, from_col)
-        return (to_row, to_col) in possible_positions   
+        return (to_row, to_col) in possible_positions  ''' 
