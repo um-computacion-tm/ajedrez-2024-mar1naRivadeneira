@@ -50,6 +50,12 @@ class Board:
                     board_str += " "
             board_str += "\n"
         return board_str
+    
+    def get_piece(self, row, col):
+        if not (
+            0 <= row < 8 or 0 <= col < 8):
+            raise OutOfBoard()
+        return self.__positions__[row][col]
          
     def get_piece(self, row, col):
         if not (
