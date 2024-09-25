@@ -45,3 +45,14 @@
 - test de movimientos diagonales ascendentes y descendentes de bishop
 - test de movimientos horizontales de rook
 - test de excepcion InvalidMove
+
+## [0.6] - 25 / 09 / 2024
+
+## Agregado
+
+- agregado de metodo para verificar si hay una pieza en una posicion
+- agregado de metodo para verificar si es una pieza enemiga la que esta en una posicion
+- agregado de general_moves para evitar repeticion
+- correccion de errores en rook y bishop 
+- actualizacion de test de rook y bishop
+- test de la excepcion OutOfBoard de board
