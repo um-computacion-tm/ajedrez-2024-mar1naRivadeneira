@@ -5,10 +5,10 @@ class Bishop(Piece):
    white_str = "♗"  
    black_str = "♝"
    
-   def possible_moves_diagonales(self, row, col):
-        directions = [(1, 1), (1, -1), (-1, 1), (-1, -1)]  # Diagonal
-        return self.general_moves(row, col, directions, single_step=False)
-  
+   def possible_moves_diagonales(self, from_row, from_col, to_row, to_col):
+      directions = [(1, 1), (1, -1), (-1, 1), (-1, -1)]  # Diagonal
+      possible_positions = self.general_moves(from_row, from_col, directions, single_step=False)
+      return(to_row, to_col) in possible_positions
    
    '''def possible_diagonal_positions(self, from_row, from_col, to_col, to_row):
       
