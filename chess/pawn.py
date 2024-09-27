@@ -34,9 +34,17 @@ class Pawn(Piece):
           elif self.__color__ == "BLACK" and row == 1 and not self.is_occupied(row + 1, col):
                if not self.is_occupied(row + 2, col):
                     moves.append((row + 2, col))
-
+          
+          #aca se verifica si el peón llega a la última fila para promoverse
+          for move in moves:
+               next_row, next_col = move
+               if (self.__color__ == "WHITE" and next_row == 0) or (self.__color__ == "BLACK" and next_row == 7):
+                    self.promote(next_row, next_col)
           return moves
-
+     
+     def promote(self, row, col):
+        self.__board__.set_piece(row, col, Queen(self.__color__, self.__board__))
+        return True #ocurrio el promote de un peon
     
 
 '''#movimiento del peon
