@@ -56,3 +56,11 @@
 - correccion de errores en rook y bishop 
 - actualizacion de test de rook y bishop
 - test de la excepcion OutOfBoard de board
+
+## [0.7] - 28 / 09 / 2024
+
+## Agregado
+
+- agregado actualizacion del movimientos de piezas 
+- correccion de issue cognitive complexity en pawn
+- agregado metodo verify_promote y promote para promocion del peon
