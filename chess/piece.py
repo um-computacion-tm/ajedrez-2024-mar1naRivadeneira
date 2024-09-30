@@ -2,6 +2,7 @@ class Piece:
     def __init__(self, color, board):
         self.__color__ = color
         self.__board__ = board
+        self.has_moved = False #para verificar los movimientos
         
     def __str__(self):         
         if self.__color__ == "WHITE":
@@ -59,7 +60,20 @@ class Piece:
                 
         return valid_moves
 
+    def possible_moves(self, from_row, from_col, to_row, to_col): 
+        #Método general para validar si un movimiento es posible.
+        directions = self.get_directions()  # Obtener las direcciones de la pieza específica
+        possible_positions = self.general_moves(from_row, from_col, directions, single_step=False)
+        return (to_row, to_col) in possible_positions
     
+    def get_directions(self):
+        #define las direcciones válidas de movimiento para la pieza.
+        raise NotImplementedError("Este método debe ser implementado por las pezas")
+
+    
+    def is_in_bounds(self, row, col):               
+          return 0 <= row < 8 and 0 <= col < 8
+      
     '''#metodo para combinar las posiciones y evitar la duplicacion
     
     def combine_possible_positions(self, position_methods, from_row, from_col):
