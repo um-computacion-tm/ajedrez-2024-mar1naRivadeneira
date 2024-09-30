@@ -20,7 +20,7 @@ class Chess:
             raise InvalidTurn()
         if not piece.possible_moves_orthogonal(from_row, from_col, to_row, to_col):
             raise InvalidMove()
-        self.__board__.move(from_row, from_col, to_col, to_row)
+        self.__board__.move(from_row, from_col, to_row, to_col)
         self.change_turn()    
         
     @property
