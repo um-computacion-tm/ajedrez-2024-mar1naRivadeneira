@@ -2,7 +2,6 @@
 from chess.piece import Piece
 from chess.queen import Queen
 
-
 class Pawn(Piece):
      white_str = "♙" 
      black_str = "♟"
@@ -14,18 +13,26 @@ class Pawn(Piece):
           directions, capture_directions = self.get_directions()
          
           #movimientos generales hacia adelante sin captura
-          moves = self.general_moves(row, col, directions, single_step=True)
+          moves.extend(self.general_moves(row, col, directions, single_step=True))   
           
           #cappturas diagonales
           moves.extend(self.capture_move_diagonal(row, col, capture_directions))
           
            #movimiento doble desde la fila inicial
-          moves.extend(self.double_step_move(row, col))
-          
+          if not self.has_moved:
+            moves.extend(self.double_step_move(row, col))
+        
           #aca se verifica si el peón llega a la última fila para promoverse a reina
           self.verify_promote(moves)
           
           return moves
+     
+     def move_pawn(self, row, col):
+        """Este método se llamará cuando el peón realice un movimiento."""
+        # Marca el peón como movido después del primer movimiento
+        self.has_moved = True
+        # Luego, realiza el movimiento de la pieza
+        self.__board__.move(self.get_piece(), (row, col))
      
      def get_directions(self):
           if self.__color__== "WHITE":
@@ -44,13 +51,20 @@ class Pawn(Piece):
          
      def double_step_move(self, row, col):
           double_step_moves = []
-          if self.__color__=="WHITE" and row ==6 and not self.is_occupied(row -1, col):
-               if not self.is_occupied(row -2, col):
-                  double_step_moves.append((row -2, col))        
-          elif self.__color__ == "BLACK" and row == 1 and not self.is_occupied(row + 1, col):
-               if not self.is_occupied(row + 2, col):
-                    double_step_moves.append((row + 2, col))
-          return double_step_moves          
+          if not self.has_moved:  #va a permitir el movimiento doble solo si el peon no se movio antes
+               dir_row = -1 if self.__color__ == "WHITE" else 1
+               next_row = row + (2 * dir_row)
+               if self.is_in_bounds(next_row, col) and not self.is_occupied(next_row, col):
+                    double_step_moves.append((next_row, col))
+                    return double_step_moves
+               
+               '''if self.__color__=="WHITE" and row ==6 and not self.is_occupied(row -1, col):
+                    if not self.is_occupied(row -2, col):
+                      double_step_moves.append((row -2, col))        
+               elif self.__color__ == "BLACK" and row == 1 and not self.is_occupied(row + 1, col):
+                    if not self.is_occupied(row + 2, col):
+                         double_step_moves.append((row + 2, col))
+               return double_step_moves '''         
           
           #aca se verifica si el peón llega a la última fila para promoverse a reina
      def verify_promote(self, moves):
@@ -59,14 +73,9 @@ class Pawn(Piece):
                if (self.__color__ == "WHITE" and next_row == 0) or (self.__color__ == "BLACK" and next_row == 7):
                     self.promote(next_row, next_col)
      
-     def promote(self, row, col):
+     def promote(self, row, col): #podria sacar el col porque solo ocurre el promote con la fila
         self.__board__.set_piece(row, col, Queen(self.__color__, self.__board__))
         return True #ocurrio el promote de un peon
-    
-    #verifica si las coordenadas estan dentro del tablero
-     def is_in_bounds(self, row, col):
-          return 0 <= row < 8 and 0 <= col < 8
-     
      
 '''#movimiento del peon
      def get_possible_positions(self, from_row, from_col):
