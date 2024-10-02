@@ -5,11 +5,12 @@ class Bishop(Piece):
    white_str = "♗"  
    black_str = "♝"
    
-   def possible_moves_diagonales(self, from_row, from_col, to_row, to_col):
-      directions = [(1, 1), (1, -1), (-1, 1), (-1, -1)]  # Diagonal
-      possible_positions = self.general_moves(from_row, from_col, directions, single_step=False)
-      return(to_row, to_col) in possible_positions
+   def valid_positions(self, from_row, from_col, to_row, to_col):
+     # Movimientos ortogonales para la torre
+     possible_move= self.general_moves(from_row, from_col, self.__bishop_directions__, single_step=False)
+     return (to_row, to_col)in possible_move
    
+   #hacer metodo del possible_positions que devuelva si tiene que hacer el ssingle_step true o false
    '''def possible_diagonal_positions(self, from_row, from_col, to_col, to_row):
       
       diagonal_methods = (
