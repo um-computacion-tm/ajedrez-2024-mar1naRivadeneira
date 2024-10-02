@@ -3,7 +3,10 @@ class Piece:
         self.__color__ = color
         self.__board__ = board
         self.has_moved = False #para verificar los movimientos
+        self.__rook_directions__=  [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        self.__bishop_directions__= [(-1, -1), (-1, 1), (1, -1), (1, 1)]
         
+
     def __str__(self):         
         if self.__color__ == "WHITE":
             return self.white_str
@@ -13,14 +16,9 @@ class Piece:
     def get_color(self):
         return self.__color__
     
-    def is_occupied(self, row, col):
-        # Verifica si hay una pieza en la posición (row, col)
-        piece = self.__board__.get_piece(row, col)
-        return piece is not None and piece.get_color() == self.get_color()
-    
-    def can_eat(self, row, col):
-        # Verifica si hay una pieza del oponente en la posición (row, col)
-        piece = self.__board__.get_piece(row, col)
+    def can_eat(self, from_row, from_col):
+        # Verifica si hay una pieza del oponente en la posición (from_row, from_col)
+        piece = self.__board__.get_piece(from_row, from_col)
         return piece is not None and piece.get_color() != self.get_color()
     
     def general_moves(self, row, col, directions, single_step=False):
@@ -40,13 +38,14 @@ class Piece:
             
             # Mueve en la dirección especificada
             while 0 <= next_row < 8 and 0 <= next_col < 8:
-                # Verificar si hay una pieza con el mismo color
-                if self.is_occupied(next_row, next_col):
-                    break  # Detener si hay una pieza propia
-                # Verificar captura
+                # Verificar captura de pieza enemiga
                 if self.can_eat(next_row, next_col):
                     valid_moves.append((next_row, next_col))  # Puede capturar
                     break  # Detener si se captura una pieza
+                
+                piece_in_target = self.__board__.get_piece(next_row, next_col)
+                if piece_in_target is not None:
+                    break
                 # Si está vacío, añadir el movimiento
                 valid_moves.append((next_row, next_col))
                 
@@ -59,12 +58,6 @@ class Piece:
                 next_col += dir_col
                 
         return valid_moves
-
-    def possible_moves(self, from_row, from_col, to_row, to_col): 
-        #Método general para validar si un movimiento es posible.
-        directions = self.get_directions()  # Obtener las direcciones de la pieza específica
-        possible_positions = self.general_moves(from_row, from_col, directions, single_step=False)
-        return (to_row, to_col) in possible_positions
     
     def get_directions(self):
         #define las direcciones válidas de movimiento para la pieza.
