@@ -45,3 +45,22 @@
 - test de movimientos diagonales ascendentes y descendentes de bishop
 - test de movimientos horizontales de rook
 - test de excepcion InvalidMove
+
+## [0.6] - 25 / 09 / 2024
+
+## Agregado
+
+- agregado de metodo para verificar si hay una pieza en una posicion
+- agregado de metodo para verificar si es una pieza enemiga la que esta en una posicion
+- agregado de general_moves para evitar repeticion
+- correccion de errores en rook y bishop 
+- actualizacion de test de rook y bishop
+- test de la excepcion OutOfBoard de board
+
+## [0.7] - 28 / 09 / 2024
+
+## Agregado
+
+- agregado actualizacion del movimientos de piezas 
+- correccion de issue cognitive complexity en pawn
+- agregado metodo verify_promote y promote para promocion del peon
