@@ -5,26 +5,22 @@ class Knight(Piece):
    white_str = "♘"  
    black_str = "♞"
   
-   def possible_moves(self, row, col):
-        """
-        Calcula todos los movimientos posibles para el caballo desde la posición actual (row, col).
-        """
-        # Todas las posibles direcciones del movimiento en forma de "L"
-        directions = [
-            (-2, -1), (-2, 1),  # Arriba a la izquierda, arriba a la derecha
-            (-1, -2), (-1, 2),  # Izquierda arriba, derecha arriba
-            (1, -2), (1, 2),    # Izquierda abajo, derecha abajo
-            (2, -1), (2, 1)     # Abajo a la izquierda, abajo a la derecha
-        ]
-        # Obtener los movimientos válidos
-        return [
-            (row + dir_row, col + dir_col)
-            for dir_row, dir_col in directions
-            if self.is_in_bounds(row + dir_row, col + dir_col) and 
-               (not self.is_occupied(row + dir_row, col + dir_col) or self.can_eat(row + dir_row, col + dir_col))
-        ]
-        '''return self.get_knight_moves(row, col, directions)'''
+   def get_valid_moves(self, from_row, from_col):
+        # se mueve en forma de L= 2 en una dirección y 1 en la otra
+        directions = self.__knight_directions__
         
+        valid_moves = []
+        
+        for dir_row, dir_col in directions:
+            next_row, next_col = from_row + dir_row, from_col + dir_col
+            if self.is_in_bounds(next_row, next_col):
+                target_piece = self.__board__.get_piece(next_row, next_col)
+                # El caballo puede moverse si la casilla está vacía o si puede capturar una pieza
+                if target_piece is None or target_piece.get_color()!= self.get_color():
+                    valid_moves.append((next_row, next_col))
+        
+        return valid_moves
+
    '''def get_knight_moves(self, row, col, directions):
         """
         Calcula los movimientos válidos del caballo, filtrando los que están fuera de los límites del tablero

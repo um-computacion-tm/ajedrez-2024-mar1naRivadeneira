@@ -6,33 +6,28 @@ class Pawn(Piece):
      white_str = "♙" 
      black_str = "♟"
    
-     def possible_moves(self, row, col):
+     def get_valid_moves(self, from_row, from_col):
           moves=[] 
 
           # direcciones según el color del peón
           directions, capture_directions = self.get_directions()
          
           #movimientos generales hacia adelante sin captura
-          moves.extend(self.general_moves(row, col, directions, single_step=True))   
+          moves.extend(self.general_moves(from_row, from_col, directions, single_step=True))   
           
           #cappturas diagonales
-          moves.extend(self.capture_move_diagonal(row, col, capture_directions))
+          moves.extend(self.capture_move_diagonal(from_row, from_col, capture_directions))
           
            #movimiento doble desde la fila inicial
           if not self.has_moved:
-            moves.extend(self.double_step_move(row, col))
+            moves.extend(self.double_step_move(from_row, from_col))
         
           #aca se verifica si el peón llega a la última fila para promoverse a reina
-          self.verify_promote(moves)
+          for move in moves:
+               to_row, to_col =move
+               self.verify_promote(from_row, from_col, to_row, to_col)
           
           return moves
-     
-     def move_pawn(self, row, col):
-        """Este método se llamará cuando el peón realice un movimiento."""
-        # Marca el peón como movido después del primer movimiento
-        self.has_moved = True
-        # Luego, realiza el movimiento de la pieza
-        self.__board__.move(self.get_piece(), (row, col))
      
      def get_directions(self):
           if self.__color__== "WHITE":
@@ -49,31 +44,24 @@ class Pawn(Piece):
                     capture_moves.append((next_row, next_col))
           return capture_moves
          
-     def double_step_move(self, row, col):
-          double_step_moves = []
-          if not self.has_moved:  #va a permitir el movimiento doble solo si el peon no se movio antes
-               dir_row = -1 if self.__color__ == "WHITE" else 1
-               next_row = row + (2 * dir_row)
-               if self.is_in_bounds(next_row, col) and not self.is_occupied(next_row, col):
-                    double_step_moves.append((next_row, col))
-                    return double_step_moves
-               
-               '''if self.__color__=="WHITE" and row ==6 and not self.is_occupied(row -1, col):
-                    if not self.is_occupied(row -2, col):
-                      double_step_moves.append((row -2, col))        
-               elif self.__color__ == "BLACK" and row == 1 and not self.is_occupied(row + 1, col):
-                    if not self.is_occupied(row + 2, col):
-                         double_step_moves.append((row + 2, col))
-               return double_step_moves '''         
+     def double_step_move(self, from_row, from_col):
+         moves = []
+         if self.__color__ == "BLACK" and from_row ==1:
+              if self.is_in_bounds(from_row + 2, from_col) and not self.__board__.get_piece(from_row + 2, from_col):
+                   moves.append((from_row +2, from_col))
+         elif self.__color__== "WHITE" and from_row == 6:
+              if self.is_in_bounds(from_row -2, from_col) and not self.__board__.get_piece(from_row -2, from_col):
+                   moves.append((from_row -2, from_col))
+                   
+         return moves               
+
           
           #aca se verifica si el peón llega a la última fila para promoverse a reina
-     def verify_promote(self, moves):
-          for move in moves:
-               next_row, next_col = move
-               if (self.__color__ == "WHITE" and next_row == 0) or (self.__color__ == "BLACK" and next_row == 7):
-                    self.promote(next_row, next_col)
+     def verify_promote(self, from_row, from_col, to_row, to_col):
+           if (self.__color__ == "WHITE" and to_row == 0) or (self.__color__ == "BLACK" and to_row == 7):
+                 self.promote(to_row, to_col)
      
-     def promote(self, row, col): #podria sacar el col porque solo ocurre el promote con la fila
+     def promote(self, row, col): #coloca una reina en la posicion de la promocion
         self.__board__.set_piece(row, col, Queen(self.__color__, self.__board__))
         return True #ocurrio el promote de un peon
      

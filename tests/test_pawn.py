@@ -6,82 +6,69 @@ from chess.queen import Queen
 class TestPawn(unittest.TestCase):
 
     def setUp(self):
-        self.board = Board(for_test=True)  
+        self.board = Board(for_test=True) 
+        self.white_pawn = Pawn("WHITE", self.board)
+        self.black_pawn = Pawn("BLACK", self.board) 
     
-    '''def test_white_pawn_single_move(self):
-        pawn = Pawn("WHITE", self.board)
-        self.board.set_piece(6, 4, pawn)  
-        moves = pawn.possible_moves(6, 4)
+    def test_possible_moves_white_pawn_initial(self):
+        self.board.set_piece(6, 4, self.white_pawn)
+        moves = self.white_pawn.get_valid_moves(6, 4)
+        expected_moves = [(5, 4), (4, 4)]
+        self.assertEqual(moves, expected_moves)
         
-        # El peón blanco debe poder moverse a (5, 4)
-        self.assertIn((5, 4), moves)
-        self.assertNotIn((4, 4), moves)'''  # No puede moverse dos casillas si ya ha avanzado
-
-    def test_white_pawn_double_move(self):
-        pawn = Pawn("WHITE", self.board)
-        self.board.set_piece(6, 4, pawn)
+    def test_possible_moves_black_pawn_initial(self):
+        self.board.set_piece(1, 4, self.black_pawn)
+        moves = self.black_pawn.get_valid_moves(1, 4)
+        expected_moves = [(2, 4), (3, 4)]
+        self.assertEqual(moves, expected_moves)   
         
-        moves = pawn.possible_moves(6, 4)
+    def test_double_step_move_white_pawn(self):
+        self.board.set_piece(6, 4, self.white_pawn)
+        moves= self.white_pawn.double_step_move(6, 4)
+        self.assertIn((4, 4), moves) #verifica que el movimiento de dos pasos este en la lista    
         
-        # El peón blanco en su primera jugada puede moverse a (5, 4) o (4, 4)
-        self.assertIn((5, 4), moves)
-        self.assertIn((4, 4), moves)
-
-    '''def test_black_pawn_single_move(self):
-        pawn = Pawn("BLACK", self.board)
-        self.board.set_piece(1, 4, pawn)
+    def test_double_step_move_black_pawn(self):
+        self.board.set_piece(1, 4, self.black_pawn)
+        moves= self.black_pawn.double_step_move(1, 4)
+        self.assertIn((3, 4), moves)   
         
-        moves = pawn.possible_moves(1, 4)
-        
-        # El peón negro debe poder moverse a (2, 4)
-        self.assertIn((2, 4), moves)
-        self.assertNotIn((3, 4), moves)'''  # No puede avanzar dos casillas después de mover
-
-    def test_black_pawn_double_move(self):
-        pawn = Pawn("BLACK", self.board)
-        self.board.set_piece(1, 4, pawn)
-        
-        moves = pawn.possible_moves(1, 4)
-        
-        # El peón negro en su primera jugada puede moverse a (2, 4) o (3, 4)
-        self.assertIn((2, 4), moves)
-        self.assertIn((3, 4), moves)
-
-    def test_pawn_diagonal_capture(self):
-        white_pawn = Pawn("WHITE", self.board)
+    def test_capture_move_diagonal_white(self):
         black_pawn = Pawn("BLACK", self.board)
-        self.board.set_piece(6, 4, white_pawn)
-        self.board.set_piece(5, 3, black_pawn)
-        
-        moves = white_pawn.possible_moves(6, 4)
-        
-        # El peón blanco debería poder capturar en diagonal hacia (5, 3)
-        self.assertIn((5, 3), moves)
-
-    def test_pawn_promotion(self):
-        # Colocamos un peón blanco listo para ser promovido
-        pawn = Pawn("WHITE", self.board)
-        self.board.set_piece(1, 4, pawn)
-        
-        moves = pawn.possible_moves(1, 4)
-        
-        # Movemos el peón a la última fila
-        pawn.promote(0, 4)
-        
-        # Verificamos si el peón fue promovido a reina
-        piece = self.board.get_piece(0, 4)
-        self.assertIsInstance(piece, Queen)
-
-    def test_pawn_blocked_move(self):
+        self.board.set_piece(5, 3, black_pawn) 
+        self.board.set_piece(6, 4, self.white_pawn)    
+        capture_moves =self.white_pawn.capture_move_diagonal(6, 4, [(-1, 1), (-1, -1)])
+        self.assertIn((5, 3), capture_moves)
+    
+    def test_capture_move_diagonal_black(self):
         white_pawn = Pawn("WHITE", self.board)
-        blocking_pawn = Pawn("WHITE", self.board)
-        self.board.set_piece(6, 4, white_pawn)
-        self.board.set_piece(5, 4, blocking_pawn)
+        self.board.set_piece(2, 3, white_pawn) 
+        self.board.set_piece(1, 4, self.black_pawn)    
+        capture_moves =self.black_pawn.capture_move_diagonal(1, 4, [(1, 1), (1, -1)])
+        self.assertIn((2, 3), capture_moves)   
         
-        moves = white_pawn.possible_moves(6, 4)
+    def test_promote_white_pawn(self):
+        self.board.set_piece(1, 4, self.white_pawn)
+        self.white_pawn.verify_promote(1, 4, 0, 4)    
+        promoted_piece = self.board.get_piece(0, 4)
+        self.assertIsInstance(promoted_piece, Queen) #verifica que ahora sea una reina
+         
+    def test_promote_black_pawn(self):
+        self.board.set_piece(6, 4, self.black_pawn)
+        self.black_pawn.verify_promote(6, 4, 7, 4)    
+        promoted_piece = self.board.get_piece(7, 4)
+        self.assertIsInstance(promoted_piece, Queen)     
         
-        # El peón no debería poder moverse si está bloqueado
-        self.assertNotIn((5, 4), moves)
-
+    def test_no_promote_white_pawn(self):
+        self.board.set_piece(2, 4, self.white_pawn)
+        self.white_pawn.verify_promote(2, 4, 1, 4)
+        promoted_piece = self.board.get_piece(1, 4)
+        self.assertNotIsInstance(promoted_piece, Queen)   
+        
+    def test_no_promote_black_pawn(self):
+        self.board.set_piece(5, 4, self.black_pawn)
+        self.black_pawn.verify_promote(5, 4, 6, 4)
+        promoted_piece = self.board.get_piece(6, 4)
+        self.assertNotIsInstance(promoted_piece, Queen)  
+             
 if __name__ == '__main__':
     unittest.main()

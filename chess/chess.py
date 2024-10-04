@@ -18,8 +18,8 @@ class Chess:
             raise EmptyPosition()
         if not piece.get_color() == self.__turn__:
             raise InvalidTurn()
-        if not piece.possible_moves_orthogonal(from_row, from_col, to_row, to_col):
-            raise InvalidMove()
+        if not piece.get_valid_moves(from_row, from_col, to_row, to_col):
+            raise InvalidMove() #generaliza el movimiento invalido para todas las piezas
         self.__board__.move(from_row, from_col, to_row, to_col)
         self.change_turn()    
         

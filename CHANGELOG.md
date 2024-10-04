@@ -64,3 +64,13 @@
 - agregado actualizacion del movimientos de piezas 
 - correccion de issue cognitive complexity en pawn
 - agregado metodo verify_promote y promote para promocion del peon
+
+## [0.8] - 02 / 10 / 2024
+
+## Agregado
+
+- arreglo del double_step_move en peon 
+- agregado de posiciones de rook y bishop en piece
+- cambio en valid_position de rook y bishop 
+- arreglo en los tests de rook y bishop
+- arreglo en la verificacion de pieza enemiga en general_move en piece
