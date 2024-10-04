@@ -7,10 +7,7 @@ class Knight(Piece):
   
    def get_valid_moves(self, from_row, from_col):
         # se mueve en forma de L= 2 en una dirección y 1 en la otra
-        directions = [
-            (-2, -1), (-2, 1), (2, -1), (2, 1),
-            (-1, -2), (-1, 2), (1, -2), (1, 2)
-        ]
+        directions = self.__knight_directions__
         
         valid_moves = []
         
