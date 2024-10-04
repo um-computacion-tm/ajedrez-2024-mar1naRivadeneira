@@ -6,7 +6,11 @@ class Piece:
         self.__all_directions__= [(-1, -1), (-1, 1), (1, -1), (1, 1), (-1, 0), (1, 0), (0, -1), (0, 1)]
         self.__rook_directions__=  [(-1, 0), (1, 0), (0, -1), (0, 1)]
         self.__bishop_directions__= [(-1, -1), (-1, 1), (1, -1), (1, 1)]
-
+        self.__knight_directions__ = [
+        (-2, -1), (-2, 1), (2, -1), (2, 1),
+        (-1, -2), (-1, 2), (1, -2), (1, 2)
+        ]
+        
     def __str__(self):         
         if self.__color__ == "WHITE":
             return self.white_str
@@ -58,6 +62,9 @@ class Piece:
                 next_col += dir_col
                 
         return valid_moves
+    
+    def calculate_moves(self, from_row, from_col, directions, single_step):
+        return self.general_moves(from_row, from_col, directions, single_step=single_step)
     
     def get_directions(self):
         #define las direcciones válidas de movimiento para la pieza.
