@@ -3,9 +3,9 @@ class Piece:
         self.__color__ = color
         self.__board__ = board
         self.has_moved = False #para verificar los movimientos
+        self.__all_directions__= [(-1, -1), (-1, 1), (1, -1), (1, 1), (-1, 0), (1, 0), (0, -1), (0, 1)]
         self.__rook_directions__=  [(-1, 0), (1, 0), (0, -1), (0, 1)]
         self.__bishop_directions__= [(-1, -1), (-1, 1), (1, -1), (1, 1)]
-        
 
     def __str__(self):         
         if self.__color__ == "WHITE":
