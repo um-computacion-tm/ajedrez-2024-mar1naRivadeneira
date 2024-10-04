@@ -7,6 +7,6 @@ class King(Piece):
    
    def get_valid_moves(self, from_row, from_col, to_row, to_col):
      # Movimientos ortogonales para la torre
-     possible_move= self.general_moves(from_row, from_col, self.__all_directions__, single_step=True)
+     possible_move= self.calculate_moves(from_row, from_col, self.__all_directions__, single_step=True)
      return (to_row, to_col)in possible_move
    
