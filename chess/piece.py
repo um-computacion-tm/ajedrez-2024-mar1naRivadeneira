@@ -6,10 +6,6 @@ class Piece:
         self.__all_directions__= [(-1, -1), (-1, 1), (1, -1), (1, 1), (-1, 0), (1, 0), (0, -1), (0, 1)]
         self.__rook_directions__=  [(-1, 0), (1, 0), (0, -1), (0, 1)]
         self.__bishop_directions__= [(-1, -1), (-1, 1), (1, -1), (1, 1)]
-        self.__knight_directions__ = [
-        (-2, -1), (-2, 1), (2, -1), (2, 1),
-        (-1, -2), (-1, 2), (1, -2), (1, 2)
-        ]
         
     def __str__(self):         
         if self.__color__ == "WHITE":
@@ -73,6 +69,9 @@ class Piece:
     
     def is_in_bounds(self, row, col):               
           return 0 <= row < 8 and 0 <= col < 8
+      
+      #movimientos diagonales generales
+      #otro metodo para movimientos ortogonales 
       
     '''#metodo para combinar las posiciones y evitar la duplicacion
     
