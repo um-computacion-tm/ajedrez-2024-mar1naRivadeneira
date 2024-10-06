@@ -5,24 +5,34 @@ class Knight(Piece):
    white_str = "♘"  
    black_str = "♞"
   
-   def get_valid_moves(self, from_row, from_col):
-        valid_moves = []
-        
-        # Generar dinámicamente los movimientos posibles del caballo
+   def generate_moves_k(self, from_row, from_col):
+        # genera los posibles movimientos del caballo en forma de L
+        possible_moves = []
         for dr in [-2, -1, 1, 2]:  # Saltos de fila
             for dc in [-2, -1, 1, 2]:  # Saltos de columna
                 if abs(dr) != abs(dc):  # Movimientos en L, descartamos los que no sean L
-                    next_row = from_row + dr
-                    next_col = from_col + dc
-                    
-                    # Verificar si la casilla está dentro del tablero
-                    if self.is_in_bounds(next_row, next_col):
-                        # Si está vacía o hay una pieza enemiga, es un movimiento válido
-                        piece_in_target = self.__board__.get_piece(next_row, next_col)
-                        if piece_in_target is None or self.can_eat(next_row, next_col):
-                            valid_moves.append((next_row, next_col))
+                    possible_moves.append((from_row + dr, from_col + dc))
+        return possible_moves
+
+   def is_valid_move_k(self, to_row, to_col):
+        # Verificar si el movimiento es válido
+        if self.is_in_bounds(to_row, to_col):
+            piece_in_target = self.__board__.get_piece(to_row, to_col)
+            return piece_in_target is None or self.can_eat(to_row, to_col)
+        return False
+    
+   def get_valid_moves(self, from_row, from_col):
+       #devuelve una lista de todos los movimientos validos para el caballo desde una posicion que se da 
+        valid_moves = []
+        possible_moves = self.generate_moves_k(from_row, from_col)
+        
+        for to_row, to_col in possible_moves:
+            if self.is_valid_move_k(to_row, to_col):
+               valid_moves.append((to_row, to_col))
+    
         
         return valid_moves
+    
 ''' valid_moves = []
      
         for dir_row, dir_col in directions:
