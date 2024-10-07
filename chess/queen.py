@@ -6,6 +6,6 @@ class Queen(Piece):
    black_str = "♛"
     
    def get_valid_moves(self, from_row, from_col, to_row, to_col):
-     # Movimientos ortogonales para la torre
+     # Movimientos ortogonales y diagonales
      possible_move= self.calculate_moves(from_row, from_col, self.__all_directions__, single_step=False)
      return (to_row, to_col)in possible_move
