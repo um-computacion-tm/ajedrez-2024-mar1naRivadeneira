@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from chess.chess import Chess
+from chess.ajedrez import Chess
 from chess.cli import play      #patch sobreescribe el comportamiento de algo, en este caso sobreescribe el print, el imput no se ejecuta
 
 
