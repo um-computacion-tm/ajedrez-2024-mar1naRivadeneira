@@ -1,6 +1,6 @@
 from chess.board import Board
-from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition
-
+from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition, KingCaptureNotAllowed
+from chess.king import King
 
 class Chess:
     def __init__(self, for_test = False):
@@ -20,9 +20,16 @@ class Chess:
             raise InvalidTurn()
         if not piece.get_valid_moves(from_row, from_col, to_row, to_col):
             raise InvalidMove() #generaliza el movimiento invalido para todas las piezas
+        
+        destination_piece = self.__board__.get_piece( to_row, to_col)
+        if isinstance(destination_piece, King):
+            raise KingCaptureNotAllowed()#no se puede permitir capturar al rey
+        
+        
         self.__board__.move(from_row, from_col, to_row, to_col)
         self.change_turn()    
         
+   
     @property
     def turn(self):
         return self.__turn__
