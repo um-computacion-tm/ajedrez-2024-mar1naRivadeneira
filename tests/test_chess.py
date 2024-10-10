@@ -1,7 +1,7 @@
 import unittest
-from chess.chess import Chess
+from chess.ajedrez import Chess
 from chess.rook import Rook
-from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition
+from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition,  SamePosition
 from chess.board import Board
 from chess.pawn import Pawn
 
