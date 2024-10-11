@@ -1,9 +1,9 @@
 from chess.ajedrez import Chess            #jeraquia de invalidmove de rook,piece,pawn pero todas son movimientos invalidos pero algunas especificos
-from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition, SamePosition
+from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition, SamePosition, OutOfBoard
 #aca se pide coordenadas o cuando quiere terminar la partida el usuario pero solo llama las funciones que estan en el chess
 def main():
     chess = Chess()
-    while Chess.is_playing():
+    while chess.is_playing():
         play(chess)
 
 def play(chess):
@@ -27,8 +27,17 @@ def play(chess):
         if promotion_happened:
             print(f"¡El peón ha sido promovido en la posición: ({to_row}, {to_col})!")
             
+    except OutOfBoard as e:
+        print("Las coordenadas están fuera del tablero.")    
+            
+    except EmptyPosition as e:
+        print("No hay ninguna pieza en la posición de origen.")
+                
     except SamePosition as e:
-        print(e)
+        print("No se puede mover la pieza a la misma direccion de origen")
+        
+    except InvalidTurn as e:
+        print("Es el turno del oponente.")    
 
     except InvalidMove as e:
         print("Su movimiento es invalido")   #el orden de las excepciones importa,  tiene que ir de la mas particular a la mas general
