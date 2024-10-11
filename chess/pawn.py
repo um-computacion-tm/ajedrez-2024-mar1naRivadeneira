@@ -6,7 +6,12 @@ class Pawn(Piece):
      white_str = "♙" 
      black_str = "♟"
    
-     def get_valid_moves(self, from_row, from_col):
+     def get_valid_moves(self, from_row, from_col, to_row, to_col):
+          # Obtener posibles movimientos y capturas
+        possible_positions = self.get_possible_pawn_moves(from_row, from_col)
+        return (to_row, to_col) in possible_positions
+     
+     def get_possible_pawn_moves(self, from_row, from_col):
           moves=[] 
 
           # direcciones según el color del peón
