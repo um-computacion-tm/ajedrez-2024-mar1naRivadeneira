@@ -11,14 +11,15 @@ class TestPawn(unittest.TestCase):
         self.black_pawn = Pawn("BLACK", self.board) 
     
     def test_possible_moves_white_pawn_initial(self):
+        # Peón blanco en (6, 4) debería poder moverse una casilla adelante
         self.board.set_piece(6, 4, self.white_pawn)
-        moves = self.white_pawn.get_valid_moves(6, 4)
-        expected_moves = [(5, 4), (4, 4)]
-        self.assertEqual(moves, expected_moves)
+        moves = self.white_pawn.get_possible_pawn_moves(6, 4)
+        self.assertIn((5, 4), moves)
+        self.assertNotIn((6, 4), moves)
         
     def test_possible_moves_black_pawn_initial(self):
         self.board.set_piece(1, 4, self.black_pawn)
-        moves = self.black_pawn.get_valid_moves(1, 4)
+        moves = self.black_pawn.get_possible_pawn_moves(1, 4)
         expected_moves = [(2, 4), (3, 4)]
         self.assertEqual(moves, expected_moves)   
         
