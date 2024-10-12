@@ -41,14 +41,20 @@ class Board:
                     self.__positions__[6][col]= Pawn("WHITE", self)
             
     def __str__(self): 
-        board_str = ""
-        for row in self.__positions__:
-            for cell in row:
+        board_str = "  0 1 2 3 4 5 6 7\n"
+        #iterar sobre filas
+        for row_index, row in enumerate(self.__positions__):
+            board_str += f"{row_index} " #indice fila al inicio
+        
+            for col_index, cell in enumerate(row):
                 if cell is not None:
-                    board_str += str(cell)
+                    board_str += f"{cell} "
                 else:
-                    board_str += " "
-            board_str += "\n"
+                    board_str += ". " #celdas vacias 
+                    
+            board_str += f"{row_index}\n"        #indice de la fila al final
+                    
+        board_str += "  0 1 2 3 4 5 6 7"  #indice  de las columnas en la parte inferior
         return board_str
     
     def get_piece(self, row, col):
