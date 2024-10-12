@@ -79,7 +79,7 @@
 
 ## Agregado
 
-- mejora en la actualizacion del tablero 
+- mejora en el metodo __str__ para la representacion del tablero 
 - agregado de mensaje de las excepciones en cli 
 - actualizacion de los test
 - agregado excepcion sameposition
