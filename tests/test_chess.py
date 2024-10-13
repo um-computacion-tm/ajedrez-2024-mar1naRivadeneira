@@ -1,7 +1,7 @@
 import unittest
-from chess.chess import Chess
+from chess.ajedrez import Chess
 from chess.rook import Rook
-from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition
+from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition,  SamePosition
 from chess.board import Board
 from chess.pawn import Pawn
 
@@ -15,14 +15,16 @@ class TestChess(unittest.TestCase):
             
         #lo que se espera que devuelva    
         tablero_esperado = (
-            "♜♞♝♛♚♝♞♜\n"    
-            "♟♟♟♟♟♟♟♟\n"  
-            "        \n"
-            "        \n"
-            "        \n"
-            "        \n"
-            "♙♙♙♙♙♙♙♙\n" 
-            "♖♘♗♕♔♗♘♖\n"          
+            "  0 1 2 3 4 5 6 7\n"
+            "0 ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 0\n"
+            "1 ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 1\n"
+            "2 . . . . . . . . 2\n"
+            "3 . . . . . . . . 3\n"
+            "4 . . . . . . . . 4\n"
+            "5 . . . . . . . . 5\n"
+            "6 ♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙ 6\n"
+            "7 ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 7\n"
+            "  0 1 2 3 4 5 6 7"      
         )    
         
         tablero_actual = chess.show_board() 

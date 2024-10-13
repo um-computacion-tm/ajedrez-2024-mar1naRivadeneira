@@ -10,16 +10,13 @@ class InvalidTurn(InvalidMove):
 
 class EmptyPosition(InvalidMove):
     message = "La posicion esta vacia"
-
+    
+class SamePosition(InvalidMove):
+    message= "No podes mover la pieza a la misma direccion de origen"
+    def __str__(self):
+        return self.message   
+            
 class OutOfBoard(InvalidMove):
     message = "La posicion indicada se encuentra fuera del tablero"
-    
-class KingCaptureNotAllowed(InvalidMove):
-    message = "No esta permitido capturar al rey"
-    def __str__(self):
-        return self.message
-    
-    
 
-    
-#guardado en raise es opcional no es un requisito obligatorio
+            

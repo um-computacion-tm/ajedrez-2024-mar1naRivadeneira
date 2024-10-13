@@ -74,3 +74,15 @@
 - cambio en valid_position de rook y bishop 
 - arreglo en los tests de rook y bishop
 - arreglo en la verificacion de pieza enemiga en general_move en piece
+
+## [0.9] - 12 / 10 / 2024
+
+## Agregado
+
+- mejora en el metodo __str__ para la representacion del tablero 
+- agregado de mensaje de las excepciones en cli 
+- actualizacion de los test
+- agregado excepcion sameposition
+- agregado tests de movimientos del rey
+- agregado tests de movimientos de la reina
+- arreglos en los movimientos de la reina y rey para evitar duplicacion
