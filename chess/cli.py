@@ -17,16 +17,13 @@ def play(chess):
         to_col = int(input("To Col: "))
             
          # :) solo se ejecuta si el ingreso es bueno, si esta mal no se ejecuta el move
-        promotion_happened = chess.move(              
+        chess.move(              
             from_row,            
             from_col,
             to_row,
             to_col,
         )
-        # Si hay una promoción, muestra un mensaje
-        if promotion_happened:
-            print(f"¡El peón ha sido promovido en la posición: ({to_row}, {to_col})!")
-            
+    
     except OutOfBoard as e:
         print("Las coordenadas están fuera del tablero.")    
             
