@@ -26,11 +26,6 @@ class Pawn(Piece):
            #movimiento doble desde la fila inicial
           if not self.has_moved:
             moves.extend(self.double_step_move(from_row, from_col))
-        
-          #aca se verifica si el peón llega a la última fila para promoverse a reina
-          for move in moves:
-               to_row, to_col =move
-               self.verify_promote(from_row, from_col, to_row, to_col)
           
           return moves
      
@@ -60,15 +55,6 @@ class Pawn(Piece):
                    
          return moves               
 
-          
-          #aca se verifica si el peón llega a la última fila para promoverse a reina
-     def verify_promote(self, from_row, from_col, to_row, to_col):
-           if (self.__color__ == "WHITE" and to_row == 0) or (self.__color__ == "BLACK" and to_row == 7):
-                 self.promote(to_row, to_col)
-     
-     def promote(self, row, col): #coloca una reina en la posicion de la promocion
-        self.__board__.set_piece(row, col, Queen(self.__color__, self.__board__))
-        return True #ocurrio el promote de un peon
      
 '''#movimiento del peon
      def get_possible_positions(self, from_row, from_col):
