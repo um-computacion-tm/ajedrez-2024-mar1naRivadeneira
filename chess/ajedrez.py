@@ -31,13 +31,6 @@ class Chess:
         
         self.__board__.move(from_row, from_col, to_row, to_col)
         self.change_turn()    
-        
-    '''def checkVictoria(self):
-    # Verifica si el rey del oponente ha sido capturado. Si fue capturado, indica una victoria
-
-    rey_oponente = "♔" if self.__turno__ == "blanco" else "♚"
-    rey_oponente_vivo = True'''
-
    
     @property
     def turn(self):
