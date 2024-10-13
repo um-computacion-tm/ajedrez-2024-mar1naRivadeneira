@@ -1,6 +1,5 @@
 #movimiento inicial de dos casillas, captura en diagonal, al llegar a la ultima fila se vuelve una reina "promote"
 from chess.piece import Piece
-from chess.queen import Queen
 
 class Pawn(Piece):
      white_str = "♙" 
@@ -8,8 +7,7 @@ class Pawn(Piece):
    
      def get_valid_moves(self, from_row, from_col, to_row, to_col):
           # Obtener posibles movimientos y capturas
-        possible_positions = self.get_possible_pawn_moves(from_row, from_col)
-        return (to_row, to_col) in possible_positions
+        return (to_row, to_col) in self.get_possible_pawn_moves(from_row, from_col)
      
      def get_possible_pawn_moves(self, from_row, from_col):
           moves=[] 
@@ -56,70 +54,3 @@ class Pawn(Piece):
          return moves               
 
      
-'''#movimiento del peon
-     def get_possible_positions(self, from_row, from_col):
-        possibles = self.get_possible_positions_move(
-            from_row,
-            from_col,
-        )
-        possibles.extend(
-            self.get_possible_positions_eat(from_row, from_col)
-        )
-        return possibles
-     
-     #capturas del peon
-     
-     def get_possible_positions_eat(self, from_row, from_col):
-          #captura diagonal derecha
-          possibles = []
-          if self.__color__ == "BLACK":
-               other_piece = self.__board__.get_piece(from_row + 1, from_col + 1)
-               if other_piece and other_piece.__color__ == "WHITE":
-                         possibles.append((from_row + 1, from_col + 1))    
-          # Captura diagonal izquierda
-               if self.__board__.in_bounds(from_row + 1, from_col - 1):
-                    other_piece = self.__board__.get_piece(from_row + 1, from_col - 1)
-                    if other_piece and other_piece.__color__ == "WHITE":
-                         possibles.append((from_row + 1, from_col - 1))
-          else:  # Para el peón blanco
-               # Captura diagonal derecha
-               if self.__board__.in_bounds(from_row - 1, from_col + 1):
-                    other_piece = self.__board__.get_piece(from_row - 1, from_col + 1)
-                    if other_piece and other_piece.__color__ == "BLACK":
-                         possibles.append((from_row - 1, from_col + 1))
-               # Captura diagonal izquierda
-               if self.__board__.in_bounds(from_row - 1, from_col - 1):
-                    other_piece = self.__board__.get_piece(from_row - 1, from_col - 1)
-                    if other_piece and other_piece.__color__ == "BLACK":
-                         possibles.append((from_row - 1, from_col - 1))
-          return possibles
-     
-     def get_possible_positions_move(self, from_row, from_col):
-          if self.__color__ == "BLACK":
-               if self.__board__.get_piece(from_row + 1, from_col) is None:
-                    if (
-                         from_row == 1 and
-                         self.__board__.get_piece(from_row + 2, from_col) is None
-                    ):
-                         return [
-                         (from_row + 1, from_col),
-                         (from_row + 2, from_col)
-                         ]
-                    else:
-                         return [
-                         (from_row + 1, from_col),
-                         ]
-          else:
-               if from_row == 6:
-                    return [
-                         (from_row - 1, from_col),
-                         (from_row - 2, from_col)
-                    ]
-               else:
-                    if self.__board__.get_piece(from_row - 1, from_col) is None:
-                         return [
-                         (from_row - 1, from_col),
-                         ]
-                    else:
-                         return []
-          return []'''
