@@ -34,7 +34,17 @@ def play(chess):
             to_col,
         )
     
-        
+        winner = chess.check_end_game()
+        if winner:
+            print(f"El ganador es {winner}")
+            print("¡Gracias por jugar!")
+            
+    except ValueError:
+        print("Entrada invalida. Por favor, ingrese numeros para las coordenadas.")       
+            
+    except SystemExit:
+        pass    
+            
     except OutOfBoard as e:
         print("Las coordenadas están fuera del tablero. Intenta de nuevo con valores de 0 al 7.")    
             
@@ -45,13 +55,13 @@ def play(chess):
         print("No se puede mover la pieza a la misma direccion de origen.")
         
     except InvalidTurn as e:
-        print("Es el turno de tu oponente. Espera tu turno para mover tus piezas.")    
+        print(f"Es el turno de tu oponente. Espera tu turno para mover tus piezas.")    
 
     except InvalidMove as e:
         print("Movimiento invalido. Por favor, revisa las reglas y asegurate de hacer movimientos permitidos.")   #el orden de las excepciones importa,  tiene que ir de la mas particular a la mas general
         
     except Exception as e:
-        print("error", e) 
+        print(f"Ocurrio un error inesperado: {e}") 
             
 if __name__ == '__main__':
     main()

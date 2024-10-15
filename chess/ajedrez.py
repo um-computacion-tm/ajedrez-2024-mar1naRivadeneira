@@ -29,12 +29,20 @@ class Chess:
         destination_piece = self.__board__.get_piece( to_row, to_col)
         
         if from_row == to_row and from_col == to_col:
-            raise SamePosition()# excepcion para que no se mueva una pieza a a la misma posicion
+            raise SamePosition()# excepcion para que no se mueva una pieza a  la misma posicion
         
         self.__board__.move(from_row, from_col, to_row, to_col)
         self.change_turn()    
    
-    
+    #verifica si algun jugador se ha quedado sin piezas y devuelve el color del ganador o None si no hay ganador aun
+    def check_end_game(self):
+        if not self.__board__.has_pieces("WHITE"):
+            self.__playing__ = False
+            return "BLACK"
+        elif not self.__board__.has_pieces("BLACK"):
+            self.__playing__ = False
+            return "WHITE"
+        return None 
     
     #Finaliza el juego por acuerdo mutuo entre los jugadores
     def end_by_agreement(self):

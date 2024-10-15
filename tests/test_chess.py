@@ -88,44 +88,62 @@ class TestChess(unittest.TestCase):
         if self.chess.turn != "BLACK":
             self.fail("El turno no cambió correctamente después de un movimiento válido.")
 
+    def test_move_raises_game_ended_exception(self):
+        # Finalizar el juego
+        self.chess.__playing__ = False
         
-    '''def test_change_turn(self): #comprueba el cambio de turno entre jugadores 
-        #test para verificar que el turno cambia de  blanco a negro
-        self.assertEqual(self.chess.turn, "WHITE")
-        self.chess.change_turn()
-        self.assertEqual(self.chess.turn, "BLACK")
-        
-        #test pars verificar que el turno cambia de negro a blanco
-        self.chess.change_turn()
-        self.assertEqual(self.chess.turn, "WHITE")
-        
-    def test_change_turn(self):
-        """Prueba si el turno cambia correctamente después de un movimiento válido."""
-        self.chess.__board__.set_piece(6, 0, Pawn("WHITE", self.chess.__board__))  # Peón blanco
-        self.chess.move(6, 0, 5, 0)  # Movimiento válido de peón blanco
-        self.assertEqual(self.chess.turn, "BLACK")  # El turno debería haber cambiado a "BLACK"
-        
-    def test_raise_empty_position(self):
         try:
-            self.chess.move(3, 3, 4, 4)
-        except EmptyPosition:
-            pass                 #si se captura la excepcion, la prueba pasa
+            self.chess.move(0, 0, 1, 0)  # Intentar mover cuando el juego ha terminado
+        except Exception as e:
+            self.assertEqual(str(e), "el juego ha terminado.")
         else:
-            self.fail("se esperaba excepcion Empty position pero no se lanzo")
-            
-    def test_raise_invalid_turn(self):
-        try:
-            self.chess.move(0, 0, 1, 0)
-        except InvalidTurn:
-            pass
-        else:
-            self.fail("se esperaba la excepcion InvalidTurn pero no se lanzo")    
-            
-    def test_raise_invalid_move(self):
-       self.chess.__board__.set_piece(0, 0, Rook("WHITE", self.chess.__board__))
-       with self.assertRaises(InvalidMove):
-           self.chess.move(0, 0, 2, 2)'''
+            self.fail("Se esperaba la excepción 'el juego ha terminado', pero no se lanzó.")
 
+    def test_end_by_agreement_ends_game(self):
+        # Verificar que el juego esté en curso
+        self.assertTrue(self.chess.is_playing())
+        
+        # Finalizar el juego por acuerdo
+        self.chess.end_by_agreement()
+        
+        # Verificar que el juego ha terminado
+        self.assertFalse(self.chess.is_playing())
+        
+    def test_check_end_game_white_no_pieces(self):
+        # Simular que las blancas no tienen piezas
+        for col in range(8):
+            self.chess.__board__.set_piece(6, col, None)  # Eliminar los peones blancos
+        self.chess.__board__.set_piece(7, 0, None)  # Eliminar torre blanca
+        self.chess.__board__.set_piece(7, 1, None)  # Eliminar caballo blanco
+        self.chess.__board__.set_piece(7, 2, None)  # Eliminar alfil blanco
+        self.chess.__board__.set_piece(7, 3, None)  # Eliminar reina blanca
+        self.chess.__board__.set_piece(7, 4, None)  # Eliminar rey blanco
+        self.chess.__board__.set_piece(7, 5, None)  # Eliminar alfil blanco
+        self.chess.__board__.set_piece(7, 6, None)  # Eliminar caballo blanco
+        self.chess.__board__.set_piece(7, 7, None)  # Eliminar torre blanca
 
+        result = self.chess.check_end_game()
+        
+        self.assertEqual(result, "BLACK")
+        self.assertFalse(self.chess.is_playing())
+
+    def test_check_end_game_black_no_pieces(self):
+        # Simular que las negras no tienen piezas
+        for col in range(8):
+            self.chess.__board__.set_piece(1, col, None)  # Eliminar los peones negros
+        self.chess.__board__.set_piece(0, 0, None)  # Eliminar torre negra
+        self.chess.__board__.set_piece(0, 1, None)  # Eliminar caballo negro
+        self.chess.__board__.set_piece(0, 2, None)  # Eliminar alfil negro
+        self.chess.__board__.set_piece(0, 3, None)  # Eliminar reina negra
+        self.chess.__board__.set_piece(0, 4, None)  # Eliminar rey negro
+        self.chess.__board__.set_piece(0, 5, None)  # Eliminar alfil negro
+        self.chess.__board__.set_piece(0, 6, None)  # Eliminar caballo negro
+        self.chess.__board__.set_piece(0, 7, None)  # Eliminar torre negra
+
+        result = self.chess.check_end_game()
+        
+        self.assertEqual(result, "WHITE")
+        self.assertFalse(self.chess.is_playing())    
+        
 if __name__ == '__main__':
     unittest.main()                
