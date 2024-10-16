@@ -71,3 +71,11 @@ class Board:
         origin = self.get_piece(from_row, from_col)
         self.set_piece(to_row, to_col, origin)
         self.set_piece(from_row, from_col, None)    
+            
+    #verifica si quedan piezas blancas o negras en el tablero        
+    def has_pieces(self, color):
+        for row in self.__positions__:
+            for piece in row:
+                if piece is not None and piece.get_color() == color:
+                    return True
+        return False            
