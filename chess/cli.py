@@ -1,6 +1,6 @@
 from chess.ajedrez import Chess            
-from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition, SamePosition, OutOfBoard
-#aca se pide coordenadas o cuando quiere terminar la partida el usuario pero solo llama las funciones que estan en el chess
+from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition, SamePosition, OutOfBoard, SameColorCapture
+
 def main():
     chess = Chess()
     while chess.is_playing():
@@ -56,9 +56,12 @@ def play(chess):
         
     except InvalidTurn as e:
         print(f"Es el turno de tu oponente. Espera tu turno para mover tus piezas.")    
+        
+    except SameColorCapture:
+        print ("No puedes capturar piezas de tu mismo color. Intenta otro movimiento.")
 
     except InvalidMove as e:
-        print("Movimiento invalido. Por favor, revisa las reglas y asegurate de hacer movimientos permitidos.")   #el orden de las excepciones importa,  tiene que ir de la mas particular a la mas general
+        print("Movimiento invalido. Por favor, revisa las reglas y asegurate de hacer movimientos permitidos.")   
         
     except Exception as e:
         print(f"Ocurrio un error inesperado: {e}") 

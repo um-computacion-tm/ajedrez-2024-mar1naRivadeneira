@@ -1,5 +1,5 @@
 from chess.board import Board
-from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition, SamePosition
+from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition, SamePosition, SameColorCapture
 
 class Chess:
     def __init__(self, for_test = False):
@@ -23,13 +23,16 @@ class Chess:
         if not piece.get_color() == self.__turn__:
             raise InvalidTurn()
         
-        if not piece.get_valid_moves(from_row, from_col, to_row, to_col):
-            raise InvalidMove() #generaliza el movimiento invalido para todas las piezas
-        
-        destination_piece = self.__board__.get_piece( to_row, to_col)
-        
         if from_row == to_row and from_col == to_col:
             raise SamePosition()# excepcion para que no se mueva una pieza a  la misma posicion
+    
+        destination_piece = self.__board__.get_piece( to_row, to_col)
+        
+        if destination_piece is not None and destination_piece.get_color() == piece.get_color():
+            raise SameColorCapture() #no se puede capturar piezas del mismo color
+        
+        if not piece.get_valid_moves(from_row, from_col, to_row, to_col):
+            raise InvalidMove() #generaliza el movimiento invalido para todas las piezas
         
         self.__board__.move(from_row, from_col, to_row, to_col)
         self.change_turn()    
