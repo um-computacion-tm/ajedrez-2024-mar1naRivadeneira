@@ -13,13 +13,13 @@
 
 # ♟️ Descripción
 
-Este proyecto consiste en un juego de ajedrez implementado en Python, siguiendo un enfoque de Programación Orientada a Objetos (OOP). El objetivo es ofrecer una representación precisa del ajedrez y un código modular fácil de extender.
+Este proyecto implementa un juego de ajedrez básico en Python, diseñado con un enfoque orientado a objetos. Incluye los movimientos esenciales de todas las piezas, pero no contempla reglas avanzadas como jaque, jaque mate, enroque o captura al paso. El juego finaliza cuando un jugador elimina todas las piezas de su oponente o cuando ambos deciden terminar la partida.
 
 ## ⚙️ Requisitos
 
 - *Python 3.x*
 - *Docker*
-- Para instalar las dependencias: pip install -r requirements.txt
+- *Instalar las dependencias*
 
 ## 🔍 Características
 
@@ -35,22 +35,22 @@ Este proyecto consiste en un juego de ajedrez implementado en Python, siguiendo 
 
 1. Clona el repositorio:
 
-https://github.com/um-computacion-tm/ajedrez-2024-mar1naRivadeneira.git
+   https://github.com/um-computacion-tm/ajedrez-2024-mar1naRivadeneira.git
 
 2. Instala las dependencias:
 
-pip install -r requirements.txt
+   pip install -r requirements.txt
 
 3. Ejecuta el juego:
 
-python3 -m chess.cli
+   python3 -m chess.cli
 
 ## 🐳 Docker
 
 1. Crear imagen Docker:
 
-docker buildx build -t ajedrez-2024-mar1naRivadeneira .
+   docker buildx build -t ajedrez-2024-mar1naRivadeneira .
 
 2. Ejecutar el contenido:
 
-docker run -i ajedrez-2024-mar1naRivadeneira
+   docker run -i ajedrez-2024-mar1naRivadeneira
