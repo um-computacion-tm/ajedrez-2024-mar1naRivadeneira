@@ -2,11 +2,15 @@ from chess.ajedrez import Chess
 from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition, SamePosition, OutOfBoard, SameColorCapture
 
 def main():
+    """Punto de entrada principal para la interfaz de línea de comandos del juego de ajedrez."""
     chess = Chess()
     while chess.is_playing():
         play(chess)
 
 def play(chess):
+    """Maneja una ronda de juego, solicitando y procesando la entrada del usuario.
+    Args:
+        chess (Chess): Instancia actual del juego de ajedrez."""
     try:
 
         print(chess.show_board())
@@ -14,6 +18,13 @@ def play(chess):
         print("Ingresa coordenadas o fin para terminar la partida: ")
         
         def get_input_or_end(prompt):
+            """Obtiene la entrada del usuario o finaliza el juego si el usuario ingresa 'fin'.
+            Args:
+                prompt (str): Texto para mostrar al solicitar la entrada.
+            Returns:
+                int: Coordenada ingresada por el usuario.
+            Raises:
+                SystemExit: Para salir del juego si el usuario ingresa 'fin'."""
             command = input(prompt).lower()
             if command == "fin":                                                  
                 chess.end_by_agreement()

@@ -1,4 +1,4 @@
-#Se mueve en forma de "L"
+
 from chess.piece import Piece
 
 class Knight(Piece): 
@@ -6,10 +6,27 @@ class Knight(Piece):
    black_str = "♞"
   
    def get_valid_moves(self, from_row, from_col, to_row, to_col):
+       """Verifica si un movimiento es válido para el caballo.
+        
+            Args:
+                from_row (int): Fila de origen.
+                from_col (int): Columna de origen.
+                to_row (int): Fila de destino.
+                to_col (int): Columna de destino.
+            
+            Returns:
+                bool: True si el movimiento es válido, False de lo contrario."""
        possible_moves = self.calculate_moves(from_row, from_col)
        return (to_row, to_col) in possible_moves
    
    def calculate_moves(self, from_row, from_col):
+        """Calcula los movimientos válidos del caballo en forma de "L".
+            Args:
+                from_row (int): Fila de origen.
+                from_col (int): Columna de origen.
+            
+            Returns:
+                list of tuple: Lista de movimientos válidos."""
         valid_moves = []
         
         for row_offset in [-2, -1, 1, 2]:
