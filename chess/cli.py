@@ -29,15 +29,14 @@ def play(chess):
             if command == "fin":                                                  
                 chess.end_by_agreement()
                 print("Los jugadores decidieron finalizar la partida. ¡Gracias por jugar!")
-                raise SystemExit  #para salir del juego
-            return int(command)  #si no es fin convierte a entero
+                raise SystemExit  
+            return int(command)  
         
         from_row = get_input_or_end("From row: ")
         from_col = get_input_or_end("From col: ")
         to_row = get_input_or_end("To Row: ")
         to_col = get_input_or_end("To Col: ")
             
-         # :) solo se ejecuta si el ingreso es bueno, si esta mal no se ejecuta el move
         chess.move(              
             from_row,            
             from_col,

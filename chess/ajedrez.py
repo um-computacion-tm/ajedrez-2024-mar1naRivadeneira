@@ -3,7 +3,7 @@ from chess.excepciones import InvalidMove, InvalidTurn, EmptyPosition, SamePosit
 
 class Chess:
     def __init__(self, for_test = False):
-        """nicializa una nueva partida de ajedrez.
+        """Inicializa una nueva partida de ajedrez.
         Args:
             for_test (bool): Si es True, inicializa el tablero sin piezas para pruebas."""
         self.__turn__ = "WHITE"
