@@ -7,10 +7,10 @@ class King(Piece):
    
    def get_valid_moves(self, from_row, from_col, to_row, to_col):
       """Comprueba si el movimiento hacia las coordenadas dadas es permitido para el Rey.
-        Este método recibe las coordenadas actuales del Rey y la casilla de destino. 
+        Este método recibe las coordenadas actuales de el Rey y la casilla de destino. 
         El Rey puede moverse una casilla en cualquier dirección
 
-        Parámetros:
+        Parámetros: 
         - La posición actual del Rey (fila y columna).
         - La posición de destino a la que se desea mover el Rey (fila y columna).
 
