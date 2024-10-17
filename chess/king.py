@@ -16,15 +16,8 @@ class King(Piece):
             Devuelve True si el movimiento es válido según las reglas para el Rey, 
             False en caso contrario.
                """
-      possible_king_positions = self.calculate_king_moves(from_row, from_col)
+      positions = self.__all_directions__         
+      possible_king_positions = self.calculate_moves(from_row, from_col, positions, single_step = True)
       return (to_row, to_col) in possible_king_positions
    
-   def calculate_king_moves(self, from_row, from_col):
-      """Calcula los movimientos válidos para el rey, limitados a un paso en cualquier dirección.
-            Args:
-               from_row (int): Fila de origen.
-               from_col (int): Columna de origen.
-            
-            Returns:
-               list of tuple: Lista de movimientos válidos."""
-      return self.calculate_moves(from_row, from_col, self.__all_directions__, single_step=True)
+   
