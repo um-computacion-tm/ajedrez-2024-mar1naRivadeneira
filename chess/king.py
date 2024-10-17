@@ -7,21 +7,17 @@ class King(Piece):
    
    def get_valid_moves(self, from_row, from_col, to_row, to_col):
       """Comprueba si el movimiento hacia las coordenadas dadas es permitido para el Rey.
-        El Rey puede desplazarse una casilla en cualquier dirección (arriba, abajo, izquierda, derecha o diagonal),
-        pero no puede moverse a una posición que lo ponga en jaque.
+        Este método recibe las coordenadas actuales del Rey y la casilla de destino. 
+        El Rey puede moverse una casilla en cualquier dirección
+
         Parámetros:
-        from_row : int
-            Fila de la posición actual del Rey en el tablero.
-        from_col : int
-            Columna de la posición actual del Rey en el tablero.
-        to_row : int
-            Fila de destino del movimiento.
-        to_col : int
-            Columna de destino del movimiento.
+        - La posición actual del Rey (fila y columna).
+        - La posición de destino a la que se desea mover el Rey (fila y columna).
 
         Retorna:
         bool:
-            True si el movimiento es legal según las reglas del ajedrez para el Rey, False en caso contrario.
+            Devuelve True si el movimiento es válido según las reglas para el Rey, 
+            False en caso contrario.
                """
       return (to_row, to_col) in self.calculate_king_moves(from_row, from_col)
    
