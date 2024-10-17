@@ -8,18 +8,18 @@ class TestCli(unittest.TestCase):
     def setUp(self):
         self.chess = Chess()
         
-    @patch(# este patch controla lo que hace el input
+    @patch(
         'builtins.input',
-        side_effect=['1', '1', '2', '2'],# estos son los valores que simula lo que ingresaria el usuario
+        side_effect=['1', '1', '2', '2'],
     )                                                  
-    @patch('builtins.print') # este patch controla lo que hace el print
+    @patch('builtins.print') 
     @patch.object(Chess, 'move')
     def test_happy_path(
         self,
         mock_chess_move,
         mock_print,
         mock_input,
-    ): #
+    ): 
         """
         Prueba el flujo normal donde el usuario ingresa coordenadas validas
         """
@@ -29,12 +29,12 @@ class TestCli(unittest.TestCase):
         self.assertEqual(mock_print.call_count, 3)
         self.assertEqual(mock_chess_move.call_count, 1)
         
-    @patch( # este patch controla lo que hace el input
+    @patch( 
         'builtins.input',
         side_effect=['hola', '1', '2', '2'],
     )
     
-    @patch('builtins.print') # este patch controla lo que hace el print
+    @patch('builtins.print') 
     @patch.object(Chess, 'move')
 
     def test_not_happy_path(
@@ -51,12 +51,12 @@ class TestCli(unittest.TestCase):
         self.assertEqual(mock_print.call_count, 4)
         self.assertEqual(mock_chess_move.call_count, 0)    
         
-    @patch( # este patch controla lo que hace el input 
+    @patch( 
         'builtins.input',
         side_effect=['1', '1', '2', 'hola'], 
     )
 
-    @patch('builtins.print') # este patch controla lo que hace el print
+    @patch('builtins.print') 
     @patch.object(Chess, 'move')
     
     def test_more_not_happy_path(
@@ -64,7 +64,7 @@ class TestCli(unittest.TestCase):
         mock_chess_move,
         mock_print,
         mock_input,
-    ): #
+    ): 
         """Prueba cuando una de las coordenadas no es valida (no numerica)"""
         
         chess = Chess()
