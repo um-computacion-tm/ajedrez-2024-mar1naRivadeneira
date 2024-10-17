@@ -6,17 +6,22 @@ class King(Piece):
    black_str = "♚"
    
    def get_valid_moves(self, from_row, from_col, to_row, to_col):
-      """Determina si un movimiento del rey desde una posición inicial hasta una posición
-         final es válido.
-         Args:
-               from_row : Fila de la posición inicial del rey.
-               from_col : Columna de la posición inicial del rey.
-               to_row : Fila de la posición de destino.
-               to_col : Columna de la posición de destino.
+      """Verifica si el movimiento solicitado es válido para el Rey.
+        Parámetros:
+         from_row : int
+               Fila de la posición inicial del Rey.
+         from_col : int
+               Columna de la posición inicial del Rey.
+         to_row : int
+               Fila de la posición destino.
+         to_col : int
+               Columna de la posición destino.
 
-            Returns:
-               bool: True si el movimiento es válido según las reglas del rey, False en caso contrario.
-            """
+         Retorna:
+         --------
+         bool:
+               True si el movimiento es válido, False en caso contrario.
+               """
       return (to_row, to_col) in self.calculate_king_moves(from_row, from_col)
    
    def calculate_king_moves(self, from_row, from_col):
