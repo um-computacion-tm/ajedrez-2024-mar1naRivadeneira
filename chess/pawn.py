@@ -28,10 +28,8 @@ class Pawn(Piece):
 
           directions, capture_directions = self.get_directions()
          
-          #movimientos generales hacia adelante sin captura
           moves.extend(self.general_moves(from_row, from_col, directions, single_step=True))   
           
-          #capturas diagonales
           moves.extend(self.capture_move_diagonal(from_row, from_col, capture_directions))
           
            #movimiento doble desde la fila inicial
