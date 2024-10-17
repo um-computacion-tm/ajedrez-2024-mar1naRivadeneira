@@ -86,3 +86,13 @@
 - agregado tests de movimientos del rey
 - agregado tests de movimientos de la reina
 - arreglos en los movimientos de la reina y rey para evitar duplicacion
+
+## [1.0] - 16 / 10 / 2024
+
+## Agregado
+
+- agregado de metodos para finalizar partida por acuerdo mutuo y sus tests
+- agregado de metodos para finalizar partida cuando un jugador capture todas las piezas oponentes y sus tests
+- agregado de tests de todas las excepciones
+- agregado de documentacion para las funciones
+- agregado de readme.md

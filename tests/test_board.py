@@ -8,12 +8,15 @@ from chess.pawn import Pawn
 from chess.king import King
 from chess.excepciones import OutOfBoard
 
-class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y las piezas 
+class TestBoard(unittest.TestCase):  
+    """Tests para la clase Board, que verifica la representación del tablero y el movimiento de las piezas."""
     
     def setUp(self):
+        """Configuración inicial para los tests, crea una instancia de Board."""
         self.board = Board()
         
     def test_str_board(self):
+        """Verifica que la representación en cadena del tablero sea la correcta."""
         board = Board()
         self.assertEqual(
             str(board),
@@ -32,6 +35,7 @@ class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y l
         )
         
     def test_move(self):
+        """Verifica que se pueda mover correctamente una pieza en el tablero."""
         board = Board(for_test=True)
         rook = Rook(color='BLACK', board=board)
         board.set_piece(0, 0, rook)
@@ -65,6 +69,7 @@ class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y l
         )
  
     def test_get_piece_out_of_range(self):
+        """Verifica que se lance una excepción cuando se accede a una posición fuera del tablero."""
         board = Board(for_test=True)
         
         with self.assertRaises(OutOfBoard) as exc:
@@ -76,7 +81,7 @@ class TestBoard(unittest.TestCase):  #verifica la representacion del tablero y l
         )
         
     def test_posiciones_iniciales_de_piezas(self):
-        
+        """Verifica las posiciones iniciales de las piezas en el tablero."""
         self.assertIsInstance(self.board.get_piece(0, 3), Queen)    
         self.assertIsInstance(self.board.get_piece(7, 3), Queen)
         
