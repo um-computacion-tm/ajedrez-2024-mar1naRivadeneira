@@ -63,7 +63,6 @@
 
 - agregado actualizacion del movimientos de piezas 
 - correccion de issue cognitive complexity en pawn
-- agregado metodo verify_promote y promote para promocion del peon
 
 ## [0.8] - 02 / 10 / 2024
 

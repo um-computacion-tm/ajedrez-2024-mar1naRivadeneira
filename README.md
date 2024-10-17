@@ -51,6 +51,6 @@ Este proyecto implementa un juego de ajedrez básico en Python, diseñado con un
 
    docker buildx build -t ajedrez-2024-mar1naRivadeneira .
 
-2. Ejecutar el contenido:
+2. Ejecutar el contenido y correr tests:
 
    docker run -i ajedrez-2024-mar1naRivadeneira
